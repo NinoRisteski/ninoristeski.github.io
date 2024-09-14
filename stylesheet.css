@@ -18,7 +18,7 @@ tr,
 p,
 a {
   font-family: 'Roboto Mono', monospace;
-  font-size: 13px
+  font-size: 13px;
 }
 
 strong {
@@ -64,5 +64,13 @@ name {
 }
 
 span.highlight {
-  background-color: #ffffd0;
+  background-color: #f7e5cb;
+}
+
+.highlight {
+  color: rgb(54, 179, 38);
+}
+
+.grey-text {
+  color: #808080;
 }
