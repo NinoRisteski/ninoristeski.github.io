@@ -1,0 +1,32 @@
+[
+  {
+    "title": "Deep Learning",
+    "authors": "Ian Goodfellow, Yoshua Bengio, and Aaron Courville",
+    "url": "https://www.deeplearningbook.org/",
+    "category": "book"
+  },
+  {
+    "title": "Neural Networks: Zero to Hero",
+    "authors": "Andrej Karpathy",
+    "url": "https://karpathy.ai/zero-to-hero.html",
+    "category": "course"
+  },
+  {
+    "title": "fast.ai",
+    "authors": "Jeremy Howard and Rachel Thomas",
+    "url": "https://www.fast.ai/",
+    "category": "course"
+  },
+  {
+    "title": "Hugging Face Courses",
+    "authors": "Hugging Face",
+    "url": "https://huggingface.co/learn",
+    "category": "course"
+  },
+  {
+    "title": "The Alignment Problem",
+    "authors": "Brian Christian",
+    "url": "https://brianchristian.org/the-alignment-problem/",
+    "category": "book"
+  }
+] 
