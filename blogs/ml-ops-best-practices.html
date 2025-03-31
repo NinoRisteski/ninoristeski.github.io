@@ -1,26 +1,22 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>MLOps Best Practices for Small Teams | Nino Risteski</title>
-  <meta name="author" content="Nino Risteski">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" type="text/css" href="../stylesheet.css?v=11">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌐</text></svg>">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Nino Risteski">
+    <title>"MLOps Best Practices for Small Teams"</title>
+    <link rel="stylesheet" type="text/css" href="../stylesheet.css?v=11">
 </head>
 <body>
-  <div class="container blog-post-container">
-    <header>
-      <a href="../index.html" class="back-link">← Home</a>
-    </header>
-    
-    <article class="blog-post-content">
-      <h1>MLOps Best Practices for Small Teams</h1>
-      <div class="post-meta">
-        <span class="post-date">2024-02-18</span>
-      </div>
-      
-      <h1>MLOps Best Practices for Small Teams</h1>
+    <div class="container">
+        <header>
+            <a href="../index.html">← Back to Home</a>
+            <h1>"MLOps Best Practices for Small Teams"</h1>
+            <p class="date">"2024-02-18"</p>
+        </header>
+        
+        <main>
+            <h1>MLOps Best Practices for Small Teams</h1>
 <p>Machine Learning Operations (MLOps) has become a critical discipline for successfully deploying ML models in production. However, most MLOps resources focus on enterprise-scale implementations. In this post, I'll share practical MLOps approaches for small teams with limited resources.</p>
 <h2>Start Simple</h2>
 <p>The most important principle for small teams is to start with minimal complexity:</p>
@@ -39,18 +35,17 @@
 - Environment details</p>
 <h3>2. Reproducible Environments</h3>
 <p>Use Docker containers or at minimum, requirements files with pinned dependencies:</p>
-<pre class="codehilite"><code class="language-bash"># Create a requirements.txt with exact versions
-pip freeze &gt; requirements.txt
-
-# Or use Docker for complete reproducibility
-FROM python:3.10-slim
+<p>```bash</p>
+<h1>Create a requirements.txt with exact versions</h1>
+<p>pip freeze &gt; requirements.txt</p>
+<h1>Or use Docker for complete reproducibility</h1>
+<p>FROM python:3.10-slim
 WORKDIR /app
 COPY requirements.txt .
 RUN pip install -r requirements.txt
 COPY . .
-CMD [&quot;python&quot;, &quot;serve_model.py&quot;]
-</code></pre>
-
+CMD ["python", "serve_model.py"]
+```</p>
 <h3>3. Simplified Deployment Patterns</h3>
 <p>Skip complex serving infrastructure initially in favor of:
 - Simple REST APIs with Flask/FastAPI
@@ -58,11 +53,11 @@ CMD [&quot;python&quot;, &quot;serve_model.py&quot;]
 - Model-as-a-function within existing applications</p>
 <h2>Conclusion</h2>
 <p>MLOps doesn't have to be overwhelming. By focusing on the fundamentals and incrementally adding complexity as needed, small teams can achieve many of the benefits of MLOps without enterprise-scale investments. </p>
-    </article>
-    
-    <footer>
-      <p>© 2024 Nino Risteski</p>
-    </footer>
-  </div>
+        </main>
+        
+        <footer>
+            <p>© 2023 Nino Risteski</p>
+        </footer>
+    </div>
 </body>
 </html>

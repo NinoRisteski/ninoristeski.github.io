@@ -1,42 +1,37 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>Getting Started with Large Language Models | Nino Risteski</title>
-  <meta name="author" content="Nino Risteski">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" type="text/css" href="../stylesheet.css?v=11">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌐</text></svg>">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Nino Risteski">
+    <title>"Getting Started with Large Language Models"</title>
+    <link rel="stylesheet" type="text/css" href="../stylesheet.css?v=11">
 </head>
 <body>
-  <div class="container blog-post-container">
-    <header>
-      <a href="../index.html" class="back-link">← Home</a>
-    </header>
-    
-    <article class="blog-post-content">
-      <h1>Getting Started with Large Language Models</h1>
-      <div class="post-meta">
-        <span class="post-date">2024-03-25</span>
-      </div>
-      
-      <h1>Getting Started with Large Language Models</h1>
+    <div class="container">
+        <header>
+            <a href="../index.html">← Back to Home</a>
+            <h1>"Getting Started with Large Language Models"</h1>
+            <p class="date">"2024-03-25"</p>
+        </header>
+        
+        <main>
+            <h1>Getting Started with Large Language Models</h1>
 <p>Large Language Models (LLMs) have revolutionized natural language processing in recent years. From GPT to LLaMA to Mistral, these models are becoming increasingly accessible to developers. In this post, I'll share some insights on how to get started with LLMs and integrate them into your applications.</p>
 <h2>Understanding the Basics</h2>
 <p>LLMs are deep learning models trained on vast amounts of text data. They can generate coherent and contextually relevant text based on the input they receive. The key to working effectively with LLMs is to understand their capabilities and limitations.</p>
 <h3>Prompt Engineering</h3>
 <p>One of the most important skills when working with LLMs is crafting effective prompts. Your prompt is essentially your interface to the model, and small changes in how you phrase your request can lead to dramatically different outputs.</p>
-<pre class="codehilite"><code class="language-python"># Basic prompt example
-response = llm.generate(&quot;Summarize the benefits of machine learning in healthcare&quot;)
-
-# More effective prompt with context and format guidelines
-response = llm.generate(&quot;&quot;&quot;
+<p>```python</p>
+<h1>Basic prompt example</h1>
+<p>response = llm.generate("Summarize the benefits of machine learning in healthcare")</p>
+<h1>More effective prompt with context and format guidelines</h1>
+<p>response = llm.generate("""
 You are a medical AI assistant helping to create content for healthcare professionals.
 Please provide a concise summary of the benefits of machine learning in healthcare.
 Structure your response with 3-5 bullet points, each with a brief explanation.
-&quot;&quot;&quot;)
-</code></pre>
-
+""")
+```</p>
 <h2>Working with Open Source Models</h2>
 <p>While commercial APIs like OpenAI's GPT models are powerful, open source alternatives can offer more flexibility and control:</p>
 <ol>
@@ -47,11 +42,11 @@ Structure your response with 3-5 bullet points, each with a brief explanation.
 <h2>Next Steps</h2>
 <p>In future posts, I'll explore fine-tuning, quantization, and deploying these models in production environments. Stay tuned!</p>
 <p>Feel free to reach out with questions or share your own experiences with LLMs. </p>
-    </article>
-    
-    <footer>
-      <p>© 2024 Nino Risteski</p>
-    </footer>
-  </div>
+        </main>
+        
+        <footer>
+            <p>© 2023 Nino Risteski</p>
+        </footer>
+    </div>
 </body>
 </html>
