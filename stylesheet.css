@@ -3,8 +3,8 @@
 
 :root {
   --text-color: #a0a7b2;
-  --accent-color: #f5a85b;
-  --accent-glow: rgba(245, 168, 91, 0.2);
+  --accent-color: #78839c;
+  --accent-glow: rgba(120, 131, 156, 0.2);
   --secondary-dark: #1a2029;
   --bg-color: #0c1016;
   --card-bg: rgba(22, 29, 39, 0.6);
@@ -63,7 +63,7 @@ h2 {
 h3 {
   font-size: 1.2rem;
   margin-bottom: 0.75rem;
-  color: #e8bb89;
+  color: #8c96a9;
 }
 
 p {
@@ -78,7 +78,7 @@ a {
 }
 
 a:hover {
-  color: #f8c990;
+  color: #97a1b7;
   text-shadow: 0 0 8px var(--accent-glow);
 }
 
@@ -114,7 +114,7 @@ header {
   position: relative;
   transform: perspective(800px) rotateY(5deg);
   box-shadow: 
-    0 0 15px rgba(245, 168, 91, 0.2),
+    0 0 15px rgba(120, 131, 156, 0.2),
     -5px 0 15px rgba(20, 20, 20, 0.4);
   transition: all 0.3s ease;
 }
@@ -151,7 +151,7 @@ header {
 .profile-image:hover {
   transform: perspective(800px) rotateY(0deg);
   box-shadow: 
-    0 0 20px rgba(245, 168, 91, 0.3),
+    0 0 20px rgba(120, 131, 156, 0.3),
     -5px 0 20px rgba(20, 20, 20, 0.4);
 }
 
@@ -212,13 +212,13 @@ header {
   border: 1px solid var(--border-color);
   border-radius: 2px;
   transition: all 0.3s ease;
-  background-color: rgba(245, 168, 91, 0.03);
+  background-color: rgba(120, 131, 156, 0.03);
   font-size: 0.85rem;
   letter-spacing: 0.1em;
 }
 
 .social-links a:hover {
-  background-color: rgba(245, 168, 91, 0.1);
+  background-color: rgba(120, 131, 156, 0.1);
   border-color: var(--accent-color);
 }
 
