@@ -275,11 +275,37 @@ header {
 }
 
 .intro {
-  font-size: 0.85rem;
-  max-width: 600px;
+  font-size: 1rem;
+  max-width: 650px;
   margin: 0 auto 1.2rem auto;
-  line-height: 1.6;
+  line-height: 1.8;
   text-align: center;
+  padding: 1.5rem;
+  border: 1px solid var(--border-color);
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 2px;
+  position: relative;
+  letter-spacing: 0.02em;
+}
+
+.intro::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(to bottom, transparent, var(--accent-color), transparent);
+}
+
+.intro::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(to bottom, transparent, var(--accent-color), transparent);
 }
 
 .social-links {
@@ -506,6 +532,12 @@ footer {
   
   .blog-post-content {
     font-size: 11px;
+  }
+  
+  .intro {
+    font-size: 0.9rem;
+    padding: 1rem;
+    line-height: 1.7;
   }
 }
 
