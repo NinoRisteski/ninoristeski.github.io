@@ -46,23 +46,29 @@ def build_blog_post(source_path, output_path):
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Nino Risteski">
-    <link rel="stylesheet" type="text/css" href="../stylesheet.css?v=22">
+    <link rel="stylesheet" type="text/css" href="../stylesheet.css?v=23">
+    <link rel="icon" type="image/x-icon" href="../favicon/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="../favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon/favicon-16x16.png">
     <title>{title}</title>
 </head>
 <body>
-    <div class="container">
+    <div class="container blog-post-container">
         <header>
-            <a href="../index.html">← Back to Home</a>
+            <a href="../index.html" class="back-link">← Back to Home</a>
             <h1>{title}</h1>
-            <p class="date">{date}</p>
+            <div class="post-meta">
+                <span class="post-date">{date}</span>
+            </div>
         </header>
         
-        <main>
+        <main class="blog-post-content">
             {html_content}
         </main>
         
         <footer>
-            <p>© {os.environ.get('YEAR', '2023')} Nino Risteski</p>
+            <p>© {os.environ.get('YEAR', '2024')} Nino Risteski</p>
         </footer>
     </div>
 </body>
