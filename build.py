@@ -47,7 +47,7 @@ def build_blog_post(source_path, output_path):
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Nino Risteski">
     <title>{title}</title>
-    <link rel="stylesheet" type="text/css" href="../stylesheet.css?v=13">
+    <link rel="stylesheet" type="text/css" href="../stylesheet.css?v=14">
 </head>
 <body>
     <div class="container">
