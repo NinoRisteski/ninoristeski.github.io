@@ -5,7 +5,7 @@
 :root {
   --primary-color: #ffffff;
   --secondary-color: #ffffff;
-  --background-color: #172B4D;
+  --background-color: #000033;
   --text-color: #ffffff;
   --accent-color: #ffffff;
   --error-color: #ffffff;
@@ -22,9 +22,9 @@
   --font-heading: 'Space Mono', monospace;
   --font-body: 'Inter', sans-serif;
   --accent-glow: rgba(255, 255, 255, 0.15);
-  --secondary-dark: #1a2029;
-  --bg-color: #0c1016;
-  --card-bg: rgba(22, 29, 39, 0.6);
+  --secondary-dark: #000022;
+  --bg-color: #000033;
+  --card-bg: rgba(0, 0, 51, 0.6);
   --title-font: 'Chakra Petch', sans-serif;
   --body-font: 'Share Tech Mono', monospace;
   --font-body: 'Courier New', monospace;
