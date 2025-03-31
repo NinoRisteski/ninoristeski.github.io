@@ -254,6 +254,18 @@ header {
   text-align: left;
 }
 
+.name-title .social-links {
+  margin-top: 0.5rem;
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.name-title .social-links a {
+  font-size: 0.6rem;
+  padding: 0.3rem 0.8rem;
+}
+
 .name-title div {
   font-family: var(--title-font);
   letter-spacing: 0.1em;
@@ -480,6 +492,16 @@ footer {
   
   .name-title {
     text-align: center;
+  }
+  
+  .name-title .social-links {
+    justify-content: center;
+    margin-top: 0.75rem;
+  }
+  
+  .name-title .social-links a {
+    font-size: 0.55rem;
+    padding: 0.25rem 0.7rem;
   }
   
   .blog-post-content {
