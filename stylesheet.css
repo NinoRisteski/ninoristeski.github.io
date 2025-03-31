@@ -1,12 +1,15 @@
-/* Tech-minimalist styling with cyber aesthetics */
+/* Simplified tech-minimalist styling */
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&display=swap');
+
 body {
-  font-family: 'Courier New', monospace;
+  font-family: 'JetBrains Mono', monospace;
   line-height: 1.6;
-  color: #c5e1e8;
-  background-color: #101418;
+  color: #b3c5d2;
+  background-color: #151a21;
   padding: 0;
   margin: 0;
   font-size: 16px;
+  font-weight: 300;
 }
 
 * {
@@ -23,9 +26,9 @@ body {
 
 /* Typography */
 h1, h2, h3 {
-  font-weight: 600;
+  font-weight: 500;
   line-height: 1.3;
-  color: #57cbdc;
+  color: #49bfd5;
 }
 
 h1 {
@@ -36,26 +39,15 @@ h1 {
 
 h2 {
   font-size: 1.5rem;
-  margin: 4rem 0 1.5rem 0;
+  margin: 3.5rem 0 1.5rem 0;
   padding-bottom: 0.5rem;
-  border-bottom: 1px solid #304755;
-  position: relative;
-}
-
-h2::after {
-  content: "";
-  position: absolute;
-  bottom: -1px;
-  left: 0;
-  width: 60px;
-  height: 3px;
-  background: linear-gradient(90deg, #57cbdc, transparent);
+  border-bottom: 1px solid #2c3643;
 }
 
 h3 {
   font-size: 1.2rem;
   margin-bottom: 0.75rem;
-  color: #7ed5e0;
+  color: #72c8d5;
 }
 
 p {
@@ -64,15 +56,13 @@ p {
 
 /* Links */
 a {
-  color: #7ed5e0;
+  color: #72c8d5;
   text-decoration: none;
   transition: all 0.2s ease;
-  position: relative;
 }
 
 a:hover {
-  color: #b3e0e8;
-  text-shadow: 0 0 8px rgba(87, 203, 220, 0.6);
+  color: #a1d9e3;
 }
 
 /* Header with profile image */
@@ -102,8 +92,7 @@ header {
   height: 100px;
   border-radius: 50%;
   overflow: hidden;
-  border: 2px solid #304755;
-  box-shadow: 0 0 15px rgba(87, 203, 220, 0.3);
+  border: 2px solid #2c3643;
 }
 
 .profile-image img {
@@ -133,17 +122,16 @@ header {
 }
 
 .social-links a {
-  font-weight: 500;
+  font-weight: 400;
   padding: 0.4rem 1rem;
-  border: 1px solid #304755;
-  border-radius: 4px;
+  border: 1px solid #2c3643;
+  border-radius: 3px;
   transition: all 0.2s ease;
 }
 
 .social-links a:hover {
-  background-color: rgba(87, 203, 220, 0.1);
-  border-color: #57cbdc;
-  transform: translateY(-2px);
+  background-color: rgba(73, 191, 213, 0.1);
+  border-color: #49bfd5;
 }
 
 /* Blog section */
@@ -157,13 +145,8 @@ header {
   margin-bottom: 1.5rem;
   padding: 1.5rem;
   background-color: rgba(30, 40, 50, 0.3);
-  border-radius: 5px;
-  border-left: 3px solid #57cbdc;
-  transition: transform 0.2s ease;
-}
-
-.blog-post:hover {
-  transform: translateX(5px);
+  border-radius: 4px;
+  border-left: 2px solid #49bfd5;
 }
 
 .blog-post p {
@@ -182,15 +165,8 @@ header {
 .project {
   padding: 1.5rem;
   background-color: rgba(30, 40, 50, 0.3);
-  border-radius: 5px;
-  transition: all 0.2s ease;
-  border-bottom: 2px solid #304755;
-}
-
-.project:hover {
-  background-color: rgba(30, 40, 50, 0.5);
-  transform: translateY(-5px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+  border-bottom: 2px solid #2c3643;
 }
 
 .project h3 {
@@ -200,16 +176,16 @@ header {
 .project-link {
   display: inline-block;
   margin-top: 1rem;
-  font-weight: 500;
+  font-weight: 400;
   padding: 0.3rem 1rem;
-  border: 1px solid #304755;
-  border-radius: 4px;
+  border: 1px solid #2c3643;
+  border-radius: 3px;
   font-size: 0.9rem;
 }
 
 .project-link:hover {
-  background-color: rgba(87, 203, 220, 0.1);
-  border-color: #57cbdc;
+  background-color: rgba(73, 191, 213, 0.1);
+  border-color: #49bfd5;
 }
 
 /* Recommendations section */
@@ -224,23 +200,18 @@ header {
   line-height: 1.5;
   padding: 0.75rem 1rem;
   background-color: rgba(30, 40, 50, 0.2);
-  border-radius: 4px;
-  transition: background-color 0.2s ease;
-}
-
-.recommendations-list li:hover {
-  background-color: rgba(30, 40, 50, 0.4);
+  border-radius: 3px;
 }
 
 .recommendations-list a {
-  font-weight: 500;
+  font-weight: 400;
 }
 
 /* Footer */
 footer {
-  margin-top: 5rem;
+  margin-top: 4rem;
   padding-top: 2rem;
-  border-top: 1px solid #304755;
+  border-top: 1px solid #2c3643;
   text-align: center;
   font-size: 0.9rem;
   color: #6c7983;
@@ -303,7 +274,7 @@ footer {
 .back-link {
   display: inline-block;
   margin-bottom: 2rem;
-  font-weight: 500;
+  font-weight: 400;
 }
 
 .blog-post-content h1 {
@@ -316,7 +287,7 @@ footer {
 }
 
 .post-date {
-  color: #57cbdc;
+  color: #49bfd5;
   font-size: 0.9rem;
 }
 
@@ -352,18 +323,18 @@ footer {
 .blog-post-content pre {
   background-color: #1a2129;
   padding: 1rem;
-  border-radius: 5px;
+  border-radius: 4px;
   overflow-x: auto;
   margin-bottom: 1.5rem;
-  border-left: 3px solid #57cbdc;
+  border-left: 2px solid #49bfd5;
 }
 
 .blog-post-content code {
-  font-family: 'Courier New', monospace;
+  font-family: 'JetBrains Mono', monospace;
   background-color: #1a2129;
   padding: 0.2rem 0.4rem;
   border-radius: 3px;
-  color: #57cbdc;
+  color: #49bfd5;
 }
 
 .blog-post-content pre code {
@@ -382,5 +353,5 @@ h1::after {
   margin-left: 0.2rem;
   font-weight: 300;
   animation: blink 1s infinite;
-  color: #57cbdc;
+  color: #49bfd5;
 }
