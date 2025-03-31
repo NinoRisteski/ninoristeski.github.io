@@ -49,7 +49,7 @@ def build_blog_post(source_path, output_path):
   <title>{title} | Nino Risteski</title>
   <meta name="author" content="Nino Risteski">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" type="text/css" href="../stylesheet.css?v=10">
+  <link rel="stylesheet" type="text/css" href="../stylesheet.css?v=11">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌐</text></svg>">
 </head>
 <body>
