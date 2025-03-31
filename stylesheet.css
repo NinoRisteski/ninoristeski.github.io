@@ -1,5 +1,5 @@
 /* Blade Runner 2049 inspired minimalist styling */
-@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
 :root {
@@ -18,8 +18,8 @@
   --shadow-color: rgba(255, 255, 255, 0.2);
   --gradient-start: #ffffff;
   --gradient-end: #ffffff;
-  --font-heading: 'Press Start 2P', cursive;
-  --font-body: 'Courier New', monospace;
+  --font-heading: 'Space Mono', monospace;
+  --font-body: 'Inter', sans-serif;
   --accent-glow: rgba(255, 255, 255, 0.15);
   --secondary-dark: #1a2029;
   --bg-color: #0c1016;
