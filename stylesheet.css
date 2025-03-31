@@ -3,41 +3,42 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
 :root {
-  --text-color: #a0a7b2;
+  --primary-color: #ffffff;
+  --secondary-color: #ffffff;
+  --background-color: #000000;
+  --text-color: #ffffff;
   --accent-color: #ffffff;
+  --error-color: #ffffff;
+  --success-color: #ffffff;
+  --warning-color: #ffffff;
+  --info-color: #ffffff;
+  --link-color: #ffffff;
+  --link-hover-color: #ffffff;
+  --border-color: #ffffff;
+  --shadow-color: rgba(255, 255, 255, 0.2);
+  --gradient-start: #ffffff;
+  --gradient-end: #ffffff;
+  --font-heading: 'Press Start 2P', cursive;
+  --font-body: 'Courier New', monospace;
   --accent-glow: rgba(255, 255, 255, 0.15);
   --secondary-dark: #1a2029;
   --bg-color: #0c1016;
   --card-bg: rgba(22, 29, 39, 0.6);
-  --border-color: #252e3d;
   --title-font: 'Chakra Petch', sans-serif;
   --body-font: 'Share Tech Mono', monospace;
-  --primary-color: #00ff00;
-  --secondary-color: #ff00ff;
-  --background-color: #000000;
-  --error-color: #ff0000;
-  --success-color: #00ff00;
-  --warning-color: #ffff00;
-  --info-color: #00ffff;
-  --link-color: #00ff00;
-  --link-hover-color: #00ffff;
-  --shadow-color: rgba(0, 255, 0, 0.2);
-  --gradient-start: #00ff00;
-  --gradient-end: #00ffff;
-  --font-heading: 'Press Start 2P', cursive;
   --font-body: 'Courier New', monospace;
 }
 
 body {
   font-family: var(--font-body);
-  line-height: 1.8;
+  line-height: 1.6;
   color: var(--text-color);
   background-color: var(--background-color);
   padding: 0;
   margin: 0;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 400;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.01em;
 }
 
 * {
@@ -63,22 +64,22 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-  font-size: 1.8rem;
-  margin-bottom: 1.5rem;
-  letter-spacing: 0.1em;
+  font-size: 1.4rem;
+  margin-bottom: 1.2rem;
+  letter-spacing: 0.05em;
 }
 
 h2 {
-  font-size: 1.4rem;
-  margin: 3rem 0 1.5rem 0;
-  padding-bottom: 0.5rem;
+  font-size: 1.1rem;
+  margin: 2rem 0 1rem 0;
+  padding-bottom: 0.4rem;
   border-bottom: 1px solid var(--border-color);
 }
 
 h3 {
-  font-size: 1.1rem;
-  margin-bottom: 1rem;
-  color: #d9dde4;
+  font-size: 0.9rem;
+  margin-bottom: 0.8rem;
+  color: var(--text-color);
 }
 
 p {
@@ -205,10 +206,10 @@ header {
 }
 
 .intro {
-  font-size: 0.95rem;
+  font-size: 0.85rem;
   max-width: 600px;
-  margin: 0 auto 1.5rem auto;
-  line-height: 1.8;
+  margin: 0 auto 1.2rem auto;
+  line-height: 1.6;
   text-align: center;
 }
 
@@ -228,8 +229,8 @@ header {
   border-radius: 2px;
   transition: all 0.3s ease;
   background-color: rgba(255, 255, 255, 0.03);
-  font-size: 0.75rem;
-  letter-spacing: 0.1em;
+  font-size: 0.65rem;
+  letter-spacing: 0.05em;
 }
 
 .social-links a:hover {
@@ -362,7 +363,7 @@ footer {
   }
   
   body {
-    font-size: 15px;
+    font-size: 13px;
   }
   
   .projects-grid {
@@ -375,7 +376,7 @@ footer {
   }
   
   .blog-post-content {
-    font-size: 15px;
+    font-size: 13px;
   }
 }
 
@@ -397,7 +398,7 @@ footer {
   }
   
   body {
-    font-size: 13px;
+    font-size: 11px;
   }
   
   .social-links {
@@ -425,7 +426,7 @@ footer {
   }
   
   .blog-post-content {
-    font-size: 13px;
+    font-size: 11px;
   }
 }
 
@@ -441,8 +442,8 @@ footer {
 }
 
 .blog-post-content h1 {
-  font-size: 2rem;
-  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+  margin-bottom: 1.2rem;
 }
 
 .post-meta {
@@ -455,19 +456,18 @@ footer {
 }
 
 .blog-post-content {
-  line-height: 1.8;
-  font-size: 14px;
+  font-size: 12px;
+  line-height: 1.6;
 }
 
 .blog-post-content h2 {
-  font-size: 1.5rem;
-  margin: 2.5rem 0 1.5rem 0;
-  border-bottom: none;
+  font-size: 1.2rem;
+  margin: 2rem 0 1rem 0;
 }
 
 .blog-post-content h3 {
-  font-size: 1.2rem;
-  margin: 2rem 0 1rem 0;
+  font-size: 1rem;
+  margin: 1.5rem 0 0.8rem 0;
 }
 
 .blog-post-content p {
