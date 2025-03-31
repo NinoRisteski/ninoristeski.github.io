@@ -156,7 +156,7 @@ function generateBlogListHTML() {
     html += `
       <div class="blog-post">
         <h3><a href="blogs/${post.slug}.html">${post.metadata.title}</a></h3>
-        <span class="post-date">${post.metadata.date}</span>
+        <span class="post-date">${new Date(post.metadata.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
         <p>${post.metadata.excerpt}</p>
       </div>
     `;
