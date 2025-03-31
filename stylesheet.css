@@ -5,7 +5,7 @@
 :root {
   --primary-color: #ffffff;
   --secondary-color: #ffffff;
-  --background-color: #000000;
+  --background-color: #172B4D;
   --text-color: #ffffff;
   --accent-color: #ffffff;
   --error-color: #ffffff;
@@ -13,9 +13,10 @@
   --warning-color: #ffffff;
   --info-color: #ffffff;
   --link-color: #ffffff;
-  --link-hover-color: #ffffff;
-  --border-color: #ffffff;
-  --shadow-color: rgba(255, 255, 255, 0.2);
+  --link-hover-color: #4DABF7;
+  --link-active-color: #74C0FC;
+  --border-color: rgba(255, 255, 255, 0.2);
+  --shadow-color: rgba(255, 255, 255, 0.1);
   --gradient-start: #ffffff;
   --gradient-end: #ffffff;
   --font-heading: 'Space Mono', monospace;
@@ -88,14 +89,69 @@ p {
 
 /* Links */
 a {
-  color: var(--accent-color);
+  color: var(--link-color);
   text-decoration: none;
   transition: all 0.2s ease;
+  position: relative;
 }
 
 a:hover {
-  color: #e6e9ef;
-  text-shadow: 0 0 8px var(--accent-glow);
+  color: var(--link-hover-color);
+}
+
+a:active {
+  color: var(--link-active-color);
+}
+
+/* Add underline effect on hover */
+a:not(.social-links a):after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 1px;
+  bottom: -2px;
+  left: 0;
+  background-color: var(--link-hover-color);
+  transition: width 0.3s ease;
+}
+
+a:not(.social-links a):hover:after {
+  width: 100%;
+}
+
+/* Social links hover effect */
+.social-links a {
+  border: 1px solid var(--border-color);
+  transition: all 0.3s ease;
+}
+
+.social-links a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+  border-color: var(--link-hover-color);
+}
+
+.social-links a:active {
+  transform: translateY(0);
+  border-color: var(--link-active-color);
+}
+
+/* Project links hover effect */
+.project h3 a:hover {
+  color: var(--link-hover-color);
+}
+
+.project h3 a:active {
+  color: var(--link-active-color);
+}
+
+/* Blog post links hover effect */
+.blog-post h3 a:hover {
+  color: var(--link-hover-color);
+}
+
+.blog-post h3 a:active {
+  color: var(--link-active-color);
 }
 
 /* Header with profile image */
