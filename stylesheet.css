@@ -5,7 +5,7 @@
   --text-color: #a0a7b2;
   --accent-color: #f5a85b;
   --accent-glow: rgba(245, 168, 91, 0.2);
-  --secondary-accent: #3a7b9d;
+  --secondary-dark: #1a2029;
   --bg-color: #0c1016;
   --card-bg: rgba(22, 29, 39, 0.6);
   --border-color: #252e3d;
@@ -109,7 +109,7 @@ header {
   transform: perspective(800px) rotateY(5deg);
   box-shadow: 
     0 0 15px rgba(245, 168, 91, 0.2),
-    -5px 0 15px rgba(58, 123, 157, 0.2);
+    -5px 0 15px rgba(20, 20, 20, 0.4);
   transition: all 0.3s ease;
 }
 
@@ -137,7 +137,7 @@ header {
     rgba(245, 168, 91, 0.1),
     transparent 10%,
     transparent 90%,
-    rgba(58, 123, 157, 0.1)
+    rgba(20, 20, 20, 0.3)
   );
   pointer-events: none;
 }
@@ -146,7 +146,7 @@ header {
   transform: perspective(800px) rotateY(0deg);
   box-shadow: 
     0 0 20px rgba(245, 168, 91, 0.3),
-    -5px 0 20px rgba(58, 123, 157, 0.3);
+    -5px 0 20px rgba(20, 20, 20, 0.4);
 }
 
 .profile-image img {
@@ -240,7 +240,7 @@ header {
   padding: 1.5rem;
   background-color: var(--card-bg);
   border-radius: 2px;
-  border-bottom: 2px solid var(--secondary-accent);
+  border-bottom: 2px solid var(--accent-color);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
@@ -441,7 +441,7 @@ body::before {
   left: 0;
   width: 100%;
   height: 100%;
-  background: radial-gradient(circle at 50% 50%, rgba(58, 123, 157, 0.05) 0%, rgba(0, 0, 0, 0) 70%);
+  background: radial-gradient(circle at 50% 50%, rgba(245, 168, 91, 0.03) 0%, rgba(0, 0, 0, 0) 70%);
   pointer-events: none;
   z-index: -1;
 }
