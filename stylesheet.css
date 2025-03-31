@@ -40,6 +40,7 @@ body {
   font-size: 12px;
   font-weight: 400;
   letter-spacing: 0.01em;
+  min-height: 100vh;
 }
 
 * {
@@ -488,13 +489,27 @@ footer {
 
 /* Blog post styles */
 .blog-post-container {
-  max-width: 700px;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  min-height: 100vh;
+  padding: 2rem;
 }
 
-.back-link {
-  display: inline-block;
+.blog-post-container header {
   margin-bottom: 2rem;
-  font-weight: 400;
+}
+
+.blog-post-container .back-link {
+  display: inline-block;
+  margin-bottom: 1rem;
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+}
+
+.blog-post-container .post-meta {
+  color: var(--text-color);
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
 }
 
 .blog-post-content h1 {
