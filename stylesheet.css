@@ -326,8 +326,8 @@ header {
 }
 
 .blog-post {
-  margin-bottom: 0.75rem;
-  padding: 0.5rem 0;
+  margin-bottom: 0.4rem;
+  padding: 0.25rem 0;
   position: relative;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   transition: opacity 0.2s ease;
@@ -415,8 +415,8 @@ header {
 }
 
 .recommendations-list li {
-  margin-bottom: 0.5rem;
-  padding: 0.5rem 0;
+  margin-bottom: 0.25rem;
+  padding: 0.25rem 0;
   transition: opacity 0.2s ease;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
