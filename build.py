@@ -34,6 +34,23 @@ def build_blog_post(source_path, output_path):
     
     # Extract frontmatter and convert markdown to HTML
     metadata, markdown_content = extract_frontmatter(content)
+
+    # Remove a duplicate top-level H1 from the markdown if present,
+    # since the template already renders the title as <h1> in the header.
+    def remove_leading_h1(md_text: str) -> str:
+        text = md_text.lstrip()
+        lines = text.splitlines()
+        if not lines:
+            return md_text
+        # ATX-style heading: "# Title"
+        if lines[0].startswith('# '):
+            return '\n'.join(lines[1:]).lstrip('\n')
+        # Setext-style H1: "Title" followed by "===="
+        if len(lines) >= 2 and lines[1].strip().startswith('==='):
+            return '\n'.join(lines[2:]).lstrip('\n')
+        return md_text
+
+    markdown_content = remove_leading_h1(markdown_content)
     # Enable fenced code blocks and useful extensions
     html_content = markdown.markdown(
         markdown_content,
