@@ -6,6 +6,8 @@ excerpt: A play-by-play guide to my first merged PRs in tinygrad: what I changed
 
 # How I Started Contributing to tinygrad — My First 4 Merged PRs
 
+![Merged PRs overview](../images/tinygrad-prs-screenshot.png)
+
 If you love building from scratch and care about high‑quality code, *tinygrad* is a great place to get your hands dirty and learn how a deep learning framework works. It's deliberately minimalist—anti‑bloat—so small and clear changes go a long way. This post is the play‑by‑play of my first (4) merged PRs: what I changed, the feedback I got, and the habits that made reviews go smoothly. 
 
 I'm writing this because I wished something like this existed when I started — consider it as a small guide I wanted on day one. Along the way I built a tiny side project, [tinypilot](https://github.com/NinoRisteski/tinypilot), to learn tinygrad by doing; if you're starting out, this project can help  you map the codebase faster.
