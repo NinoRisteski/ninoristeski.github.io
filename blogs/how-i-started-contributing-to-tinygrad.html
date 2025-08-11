@@ -22,16 +22,16 @@
         </header>
         
         <main class="blog-post-content">
-            <h1>How I Started Contributing to tinygrad (A Technical, Conversational Guide)</h1>
-<p>If you love building from scratch and care about high‑quality code, <em>tinygrad</em> is a great place to get your hands dirty and learn how a deep learning framework works. It's deliberately minimalist—anti‑bloat—so small and clear changes go a long way. This post is the play‑by‑play of my first (4) merged PRs: what I changed, the feedback I got, and the habits that made reviews go smoothly. </p>
-<p>I'm writing this because I wished something like this existed when I started — consider it as a small guide I wanted on day one. Along the way I built a tiny side project, <a href="https://github.com/NinoRisteski/tinypilot">tinypilot</a>, to learn tinygrad by doing; if you're starting out, this project can help  you map the codebase faster.</p>
-<p><strong>One ground rule on AI (and code ownership):</strong> use AI to <em>learn</em> the codebase — to map the repo, explain helpers, find related files, and maybe suggest ideas. <strong>Don't</strong> use AI to generate the code you will push. You should understand and own every line in your PR; tinygrad values clarity and intent over volume.</p>
+            <h1 id="how-i-started-contributing-to-tinygrad-a-technical-conversational-guide">How I Started Contributing to tinygrad (A Technical, Conversational Guide)</h1>
+<p>If you love building from scratch and care about high‑quality code, <em>tinygrad</em> is a great place to get your hands dirty and learn how a deep learning framework works. It&rsquo;s deliberately minimalist—anti‑bloat—so small and clear changes go a long way. This post is the play‑by‑play of my first (4) merged PRs: what I changed, the feedback I got, and the habits that made reviews go smoothly. </p>
+<p>I&rsquo;m writing this because I wished something like this existed when I started — consider it as a small guide I wanted on day one. Along the way I built a tiny side project, <a href="https://github.com/NinoRisteski/tinypilot">tinypilot</a>, to learn tinygrad by doing; if you&rsquo;re starting out, this project can help  you map the codebase faster.</p>
+<p><strong>One ground rule on AI (and code ownership):</strong> use AI to <em>learn</em> the codebase — to map the repo, explain helpers, find related files, and maybe suggest ideas. <strong>Don&rsquo;t</strong> use AI to generate the code you will push. You should understand and own every line in your PR; tinygrad values clarity and intent over volume.</p>
 <p><strong>Before you contribute:</strong></p>
 <ul>
 <li><strong>Read the codebase</strong>: skim <code>tinygrad/</code> and <code>test/</code>, then trace one op end‑to‑end so you know the dataflow. Would suggest to start with tensor.py first.</li>
-<li><strong>Search Tinygrad Discord / prior PRs &amp; issues</strong>: most beginner questions have been asked and answered. Find context before you ask. Don't clutter the channels - it's a dev focused only place to build tinygrad.</li>
-<li><strong>Respect maintainers' time</strong>: it's open‑source, but core contributors and employees are not your tutors. Arrive with a minimal repro, a concrete change, and a small proposed diff. Think <strong>signal &gt; noise</strong>.</li>
-<li><strong>No "exploratory" PRs</strong>: drafts are fine if you already have a plan and started working on an improvement. Otherwise, prototype locally until you do.</li>
+<li><strong>Search Tinygrad Discord / prior PRs &amp; issues</strong>: most beginner questions have been asked and answered. Find context before you ask. Don&rsquo;t clutter the channels - it&rsquo;s a dev focused only place to build tinygrad.</li>
+<li><strong>Respect maintainers&rsquo; time</strong>: it&rsquo;s open‑source, but core contributors and employees are not your tutors. Arrive with a minimal repro, a concrete change, and a small proposed diff. Think <strong>signal &gt; noise</strong>.</li>
+<li><strong>No &ldquo;exploratory&rdquo; PRs</strong>: drafts are fine if you already have a plan and started working on an improvement. Otherwise, prototype locally until you do.</li>
 </ul>
 <p><strong>Before you push, triple‑check quality:</strong></p>
 <ul>
@@ -41,105 +41,111 @@
 </ul>
 <p><strong>tl;dr</strong>: Ship tiny, test rigorously, <strong>triple‑check quality</strong>, explain clearly — and optimize for signal over noise, as I mentioned (very important).</p>
 <hr />
-<h2>How to ramp up fast:</h2>
+<h2 id="how-to-ramp-up-fast">How to ramp up fast:</h2>
 <ul>
-<li><strong>Start with a map, not a build</strong>: skim the repo tree, peek into <code>tinygrad/</code> and <code>test/</code>, and follow one op end‑to‑end. You'll pick up the project's idioms faster than any tutorial.</li>
+<li><strong>Start with a map, not a build</strong>: skim the repo tree, peek into <code>tinygrad/</code> and <code>test/</code>, and follow one op end‑to‑end. You&rsquo;ll pick up the project&rsquo;s idioms faster than any tutorial.</li>
 <li><strong>Make a tiny sandbox</strong>: spin up a scratch script or run a single narrow test so you can poke at tensors and helpers. Quick feedback beats reading everything.</li>
 <li><strong>Prove it to yourself first</strong>: reproduce the issue or demonstrate the improvement locally. Sanity‑check edge cases (odd shapes, dtypes) before you push your code.</li>
 <li><strong>Think like a maintainer</strong>: use native tinygrad helpers, avoid adding new dependencies, keep commits small, choose obvious names, explain changes simply, and be ready to dive deep when asked.</li>
 <li><strong>Ship in small commits</strong>: even if the PR is broad, keep commits crisp and bisect‑friendly. Reviewers (and future you) will thank you.</li>
 </ul>
 <hr />
-<h2>PR 1 — Prefer the built‑in <code>fetch</code> over ad‑hoc download glue</h2>
+<h2 id="pr-1-prefer-the-builtin-fetch-over-adhoc-download-glue">PR 1 — Prefer the built‑in <code>fetch</code> over ad‑hoc download glue</h2>
 <p><em>Merged: Jun 19, 2025</em>\
 ([#10877])</p>
 <p><strong>The situation</strong>: While reading the codebase to understand how things fit together, I found an example that used a local <code>download_file</code> plus an <code>os.path.isfile</code> check. It worked, but it duplicated what <em>tinygrad</em> already provides with <code>fetch</code>.</p>
 <blockquote>
-<p>Review note: "Use <code>fetch</code> directly. The extra existence check isn't needed. Please try this on a clean environment and update the PR title to reflect the change."</p>
+<p>Review note: &ldquo;Use <code>fetch</code> directly. The extra existence check isn&rsquo;t needed. Please try this on a clean environment and update the PR title to reflect the change.&rdquo;</p>
 </blockquote>
 <p><strong>The change</strong>: Replace the custom logic with <code>fetch(url, path)</code> and remove the extra check. Keep the diff small and focused. Pretty basic, right? Yes. but you have to go through the codebase and see it. Also, if you want to contribute big, you should start small, like this PR.</p>
 <p><strong>Before</strong></p>
-<p>```python
-from tinygrad.helpers import getenv</p>
-<p>def download_if_not_present(file_path: Path, url: str):
-    if not os.path.isfile(file_path):
-        download_file(url, file_path)
-    return file_path</p>
-<h1>...</h1>
-<p>download_if_not_present(checkpoint_path, checkpoint_url)</p>
-<h1>...</h1>
-<p>download_if_not_present(config_path, config_url)
-download_if_not_present(weights_path, weights_url)</p>
-<h1>...</h1>
-<p>if audio_path == DEMO_PATH: download_if_not_present(DEMO_PATH, DEMO_URL)
-```</p>
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><span style="color: #f92672">from</span> <span style="color: #f8f8f2">tinygrad.helpers</span> <span style="color: #f92672">import</span> <span style="color: #f8f8f2">getenv</span>
+
+<span style="color: #66d9ef">def</span> <span style="color: #a6e22e">download_if_not_present</span><span style="color: #f8f8f2">(file_path:</span> <span style="color: #f8f8f2">Path,</span> <span style="color: #f8f8f2">url:</span> <span style="color: #f8f8f2">str):</span>
+    <span style="color: #66d9ef">if</span> <span style="color: #f92672">not</span> <span style="color: #f8f8f2">os</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">path</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">isfile(file_path):</span>
+        <span style="color: #f8f8f2">download_file(url,</span> <span style="color: #f8f8f2">file_path)</span>
+    <span style="color: #66d9ef">return</span> <span style="color: #f8f8f2">file_path</span>
+
+<span style="color: #75715e"># ...</span>
+<span style="color: #f8f8f2">download_if_not_present(checkpoint_path,</span> <span style="color: #f8f8f2">checkpoint_url)</span>
+<span style="color: #75715e"># ...</span>
+<span style="color: #f8f8f2">download_if_not_present(config_path,</span> <span style="color: #f8f8f2">config_url)</span>
+<span style="color: #f8f8f2">download_if_not_present(weights_path,</span> <span style="color: #f8f8f2">weights_url)</span>
+<span style="color: #75715e"># ...</span>
+<span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">audio_path</span> <span style="color: #f92672">==</span> <span style="color: #f8f8f2">DEMO_PATH:</span> <span style="color: #f8f8f2">download_if_not_present(DEMO_PATH,</span> <span style="color: #f8f8f2">DEMO_URL)</span>
+</code></pre></div>
+
 <p><strong>After</strong></p>
-<p>```python
-from tinygrad.helpers import getenv, fetch</p>
-<h1>...</h1>
-<p>fetch(checkpoint_url, checkpoint_path)</p>
-<h1>...</h1>
-<p>fetch(config_url, config_path)
-fetch(weights_url, weights_path)</p>
-<h1>...</h1>
-<p>if audio_path == DEMO_PATH: fetch(DEMO_URL, DEMO_PATH)
-```</p>
-<p>Using the built‑in <code>fetch</code> keeps every download going through one well‑known path. Fixes and improvements land in that single helper and benefit the whole repo. It also makes examples easier to read: people skimming the code instantly know what <code>fetch</code> does. Dropping the extra <code>isfile</code> check removes edge cases like partial files or racy checks that diverge across scripts. And because <code>fetch</code> is native to tinygrad, there's no need for extra utilities or third‑party libraries — the dependency surface stays small.</p>
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><span style="color: #f92672">from</span> <span style="color: #f8f8f2">tinygrad.helpers</span> <span style="color: #f92672">import</span> <span style="color: #f8f8f2">getenv,</span> <span style="color: #f8f8f2">fetch</span>
+
+<span style="color: #75715e"># ...</span>
+<span style="color: #f8f8f2">fetch(checkpoint_url,</span> <span style="color: #f8f8f2">checkpoint_path)</span>
+<span style="color: #75715e"># ...</span>
+<span style="color: #f8f8f2">fetch(config_url,</span> <span style="color: #f8f8f2">config_path)</span>
+<span style="color: #f8f8f2">fetch(weights_url,</span> <span style="color: #f8f8f2">weights_path)</span>
+<span style="color: #75715e"># ...</span>
+<span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">audio_path</span> <span style="color: #f92672">==</span> <span style="color: #f8f8f2">DEMO_PATH:</span> <span style="color: #f8f8f2">fetch(DEMO_URL,</span> <span style="color: #f8f8f2">DEMO_PATH)</span>
+</code></pre></div>
+
+<p>Using the built‑in <code>fetch</code> keeps every download going through one well‑known path. Fixes and improvements land in that single helper and benefit the whole repo. It also makes examples easier to read: people skimming the code instantly know what <code>fetch</code> does. Dropping the extra <code>isfile</code> check removes edge cases like partial files or racy checks that diverge across scripts. And because <code>fetch</code> is native to tinygrad, there&rsquo;s no need for extra utilities or third‑party libraries — the dependency surface stays small.</p>
 <p><strong>What the review changed</strong></p>
 <p>The reviewer asked to use <code>fetch</code> directly, remove the redundant existence check, and verify on a clean environment. I also updated the PR title to describe the change precisely and deleted the local helper to avoid drift.</p>
 <p><strong>How I validated</strong></p>
-<p>I started by running <code>ruff check</code> locally to confirm the output matched what CI would see. Then I executed all the examples I'd touched to make sure I hadn't broken anything. As a final test, I opened a throwaway PR that deliberately reintroduced an unused import and watched CI flag it immediately—proof the guardrail was working.</p>
+<p>I started by running <code>ruff check</code> locally to confirm the output matched what CI would see. Then I executed all the examples I&rsquo;d touched to make sure I hadn&rsquo;t broken anything. As a final test, I opened a throwaway PR that deliberately reintroduced an unused import and watched CI flag it immediately—proof the guardrail was working.</p>
 <p><strong>Tinygrad principle reinforced</strong>: Automate cleanliness: encode standards in CI and keep rules narrow  to maximize signal and prevent drift.</p>
 <hr />
-<h2>PR 4 — Add <code>enable_gqa</code> to SDPA (+ tests)</h2>
+<h2 id="pr-4-add-enable_gqa-to-sdpa-tests">PR 4 — Add <code>enable_gqa</code> to SDPA (+ tests)</h2>
 <p><em>Merged: Jul 7, 2025</em>\
 ([#11097])</p>
 <p><strong>Discovery:</strong> I learned tinygrad was missing the <code>enable_gqa</code> knob (Grouped-Query Attention) from a Discord post where George Hotz pointed out that SDPA should have <code>enable_gqa</code>. That call-out made the gap obvious and pushed me to wire it up.&#x20;</p>
 <blockquote>
-<p>Review notes: "Why doesn't the test assert the Torch flag?". I updated the tests to use (and compare to) PyTorch's <code>enable_gqa</code> when available.</p>
+<p>Review notes: &ldquo;Why doesn&rsquo;t the test assert the Torch flag?&rdquo;. I updated the tests to use (and compare to) PyTorch&rsquo;s <code>enable_gqa</code> when available.</p>
 </blockquote>
-<p><strong>The change</strong>: I extended the Tensor method signature to accept <code>enable_gqa</code>, and—when it's set—repeat K and V across the head dimension to match Q. It's a no-op when the head counts already match, and it raises a clear error when they don't divide. Direct implementation from PyTorch.</p>
+<p><strong>The change</strong>: I extended the Tensor method signature to accept <code>enable_gqa</code>, and—when it&rsquo;s set—repeat K and V across the head dimension to match Q. It&rsquo;s a no-op when the head counts already match, and it raises a clear error when they don&rsquo;t divide. Direct implementation from PyTorch.</p>
 <p><strong>Before</strong></p>
-<p><code>python
-def scaled_dot_product_attention(self, key: Tensor, value: Tensor,
-                                 attn_mask: Tensor | None = None,
-                                 dropout_p: float = 0.0,
-                                 is_causal: bool = False) -&gt; Tensor:
-    ...</code></p>
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><span style="color: #66d9ef">def</span> <span style="color: #a6e22e">scaled_dot_product_attention</span><span style="color: #f8f8f2">(self,</span> <span style="color: #f8f8f2">key:</span> <span style="color: #f8f8f2">Tensor,</span> <span style="color: #f8f8f2">value:</span> <span style="color: #f8f8f2">Tensor,</span>
+                                 <span style="color: #f8f8f2">attn_mask:</span> <span style="color: #f8f8f2">Tensor</span> <span style="color: #f92672">|</span> <span style="color: #66d9ef">None</span> <span style="color: #f92672">=</span> <span style="color: #66d9ef">None</span><span style="color: #f8f8f2">,</span>
+                                 <span style="color: #f8f8f2">dropout_p:</span> <span style="color: #f8f8f2">float</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">0.0</span><span style="color: #f8f8f2">,</span>
+                                 <span style="color: #f8f8f2">is_causal:</span> <span style="color: #f8f8f2">bool</span> <span style="color: #f92672">=</span> <span style="color: #66d9ef">False</span><span style="color: #f8f8f2">)</span> <span style="color: #f92672">-&gt;</span> <span style="color: #f8f8f2">Tensor:</span>
+    <span style="color: #f92672">...</span>
+</code></pre></div>
+
 <p><strong>After</strong></p>
-<p><code>python
-def scaled_dot_product_attention(self, key: Tensor, value: Tensor,
-                                 attn_mask: Tensor | None = None,
-                                 dropout_p: float = 0.0,
-                                 is_causal: bool = False,
-                                 enable_gqa: bool = False) -&gt; Tensor:
-    if enable_gqa:
-        # repeat K/V heads to match Q heads (GQA)
-        key = key.repeat_interleave(self.shape[-3] // key.shape[-3], dim=-3)
-        value = value.repeat_interleave(self.shape[-3] // value.shape[-3], dim=-3)
-    ...</code></p>
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><span style="color: #66d9ef">def</span> <span style="color: #a6e22e">scaled_dot_product_attention</span><span style="color: #f8f8f2">(self,</span> <span style="color: #f8f8f2">key:</span> <span style="color: #f8f8f2">Tensor,</span> <span style="color: #f8f8f2">value:</span> <span style="color: #f8f8f2">Tensor,</span>
+                                 <span style="color: #f8f8f2">attn_mask:</span> <span style="color: #f8f8f2">Tensor</span> <span style="color: #f92672">|</span> <span style="color: #66d9ef">None</span> <span style="color: #f92672">=</span> <span style="color: #66d9ef">None</span><span style="color: #f8f8f2">,</span>
+                                 <span style="color: #f8f8f2">dropout_p:</span> <span style="color: #f8f8f2">float</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">0.0</span><span style="color: #f8f8f2">,</span>
+                                 <span style="color: #f8f8f2">is_causal:</span> <span style="color: #f8f8f2">bool</span> <span style="color: #f92672">=</span> <span style="color: #66d9ef">False</span><span style="color: #f8f8f2">,</span>
+                                 <span style="color: #f8f8f2">enable_gqa:</span> <span style="color: #f8f8f2">bool</span> <span style="color: #f92672">=</span> <span style="color: #66d9ef">False</span><span style="color: #f8f8f2">)</span> <span style="color: #f92672">-&gt;</span> <span style="color: #f8f8f2">Tensor:</span>
+    <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">enable_gqa:</span>
+        <span style="color: #75715e"># repeat K/V heads to match Q heads (GQA)</span>
+        <span style="color: #f8f8f2">key</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">key</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">repeat_interleave(self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">shape[</span><span style="color: #f92672">-</span><span style="color: #ae81ff">3</span><span style="color: #f8f8f2">]</span> <span style="color: #f92672">//</span> <span style="color: #f8f8f2">key</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">shape[</span><span style="color: #f92672">-</span><span style="color: #ae81ff">3</span><span style="color: #f8f8f2">],</span> <span style="color: #f8f8f2">dim</span><span style="color: #f92672">=-</span><span style="color: #ae81ff">3</span><span style="color: #f8f8f2">)</span>
+        <span style="color: #f8f8f2">value</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">value</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">repeat_interleave(self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">shape[</span><span style="color: #f92672">-</span><span style="color: #ae81ff">3</span><span style="color: #f8f8f2">]</span> <span style="color: #f92672">//</span> <span style="color: #f8f8f2">value</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">shape[</span><span style="color: #f92672">-</span><span style="color: #ae81ff">3</span><span style="color: #f8f8f2">],</span> <span style="color: #f8f8f2">dim</span><span style="color: #f92672">=-</span><span style="color: #ae81ff">3</span><span style="color: #f8f8f2">)</span>
+    <span style="color: #f92672">...</span>
+</code></pre></div>
+
 <p><strong>Test vibe</strong></p>
-<p>```python</p>
-<h1>parity with torch when enable_gqa=True</h1>
-<p>lambda x, y, z: torch.nn.functional.scaled_dot_product_attention(x, y, z, enable_gqa=True)
-lambda x, y, z: Tensor.scaled_dot_product_attention(x, y, z, enable_gqa=True)</p>
-<h1>error path when shapes don't divide cleanly</h1>
-<p>self.helper_test_exception([...],
-    lambda x,y,z: torch.nn.functional.scaled_dot_product_attention(x,y,z),
-    lambda x,y,z: Tensor.scaled_dot_product_attention(x,y,z, enable_gqa=True),
-    expected=(AssertionError, RuntimeError, ValueError))
-```</p>
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><span style="color: #75715e"># parity with torch when enable_gqa=True</span>
+<span style="color: #66d9ef">lambda</span> <span style="color: #f8f8f2">x,</span> <span style="color: #f8f8f2">y,</span> <span style="color: #f8f8f2">z:</span> <span style="color: #f8f8f2">torch</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">nn</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">functional</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">scaled_dot_product_attention(x,</span> <span style="color: #f8f8f2">y,</span> <span style="color: #f8f8f2">z,</span> <span style="color: #f8f8f2">enable_gqa</span><span style="color: #f92672">=</span><span style="color: #66d9ef">True</span><span style="color: #f8f8f2">)</span>
+<span style="color: #66d9ef">lambda</span> <span style="color: #f8f8f2">x,</span> <span style="color: #f8f8f2">y,</span> <span style="color: #f8f8f2">z:</span> <span style="color: #f8f8f2">Tensor</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">scaled_dot_product_attention(x,</span> <span style="color: #f8f8f2">y,</span> <span style="color: #f8f8f2">z,</span> <span style="color: #f8f8f2">enable_gqa</span><span style="color: #f92672">=</span><span style="color: #66d9ef">True</span><span style="color: #f8f8f2">)</span>
+
+<span style="color: #75715e"># error path when shapes don&#39;t divide cleanly</span>
+<span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">helper_test_exception([</span><span style="color: #f92672">...</span><span style="color: #f8f8f2">],</span>
+    <span style="color: #66d9ef">lambda</span> <span style="color: #f8f8f2">x,y,z:</span> <span style="color: #f8f8f2">torch</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">nn</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">functional</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">scaled_dot_product_attention(x,y,z),</span>
+    <span style="color: #66d9ef">lambda</span> <span style="color: #f8f8f2">x,y,z:</span> <span style="color: #f8f8f2">Tensor</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">scaled_dot_product_attention(x,y,z,</span> <span style="color: #f8f8f2">enable_gqa</span><span style="color: #f92672">=</span><span style="color: #66d9ef">True</span><span style="color: #f8f8f2">),</span>
+    <span style="color: #f8f8f2">expected</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">AssertionError</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">RuntimeError</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">ValueError</span><span style="color: #f8f8f2">))</span>
+</code></pre></div>
+
 <p>&#x20;Implementing GQA by repeating K/V heads is simple and transparent, and it works across devices without extra dependencies.</p>
 <p><strong>What the review changed</strong></p>
-<p>After feedback, I added a direct Torch comparison in the test when the local version exposes <code>enable_gqa</code>, cleaned up small style issues, and noted the supported Torch versions in the PR text so the test wouldn't flap depending on the environment.</p>
+<p>After feedback, I added a direct Torch comparison in the test when the local version exposes <code>enable_gqa</code>, cleaned up small style issues, and noted the supported Torch versions in the PR text so the test wouldn&rsquo;t flap depending on the environment.</p>
 <p><strong>How I validated</strong></p>
-<p>I checked shapes and basic invariants with the flag on and off across common head counts, then compared outputs to PyTorch where available (with reasonable tolerances). I also skimmed call sites to ensure the added keyword didn't break existing usage.</p>
+<p>I checked shapes and basic invariants with the flag on and off across common head counts, then compared outputs to PyTorch where available (with reasonable tolerances). I also skimmed call sites to ensure the added keyword didn&rsquo;t break existing usage.</p>
 <p><strong>Tinygrad principle</strong>: Mirror upstream semantics when it helps users, keep the surface small, and cover changes with direct tests.</p>
 <hr />
-<h2>Summary</h2>
-<p>If you're looking for the shortest path to your first contribution, it's this: Don't search shortcuts. Read the code and tests, start tiny, and make changes that are easy to verify. Use AI to learn the map of the repo, not to write your diff. Arrive with a clear problem statement, a minimal fix, and proof it works.</p>
+<h2 id="summary">Summary</h2>
+<p>If you&rsquo;re looking for the shortest path to your first contribution, it&rsquo;s this: Don&rsquo;t search shortcuts. Read the code and tests, start tiny, and make changes that are easy to verify. Use AI to learn the map of the repo, not to write your diff. Arrive with a clear problem statement, a minimal fix, and proof it works.</p>
 <p>Keep the surface area small. Prefer native tinygrad helpers over one‑off utilities, avoid adding dependencies, and delete code when it simplifies the flow. When you clean something up, protect it with a guardrail (CI/lint/test) so it stays clean next week.</p>
-<p>Make reviews easy. Write in plain language, keep commits focused, and explain what changed and why in two sentences. Search Discord and past PRs before asking questions, and respect maintainers' time by bringing signal, not noise. Do this a few times and you won't just ship patches — you'll start thinking like a tinygrad contributor.</p>
+<p>Make reviews easy. Write in plain language, keep commits focused, and explain what changed and why in two sentences. Search Discord and past PRs before asking questions, and respect maintainers&rsquo; time by bringing signal, not noise. Do this a few times and you won&rsquo;t just ship patches — you&rsquo;ll start thinking like a tinygrad contributor.</p>
         </main>
         
         <footer>

@@ -22,43 +22,44 @@
         </header>
         
         <main class="blog-post-content">
-            <h1>MLOps Best Practices for Small Teams</h1>
-<p>Machine Learning Operations (MLOps) has become a critical discipline for successfully deploying ML models in production. However, most MLOps resources focus on enterprise-scale implementations. In this post, I'll share practical MLOps approaches for small teams with limited resources.</p>
-<h2>Start Simple</h2>
+            <h1 id="mlops-best-practices-for-small-teams">MLOps Best Practices for Small Teams</h1>
+<p>Machine Learning Operations (MLOps) has become a critical discipline for successfully deploying ML models in production. However, most MLOps resources focus on enterprise-scale implementations. In this post, I&rsquo;ll share practical MLOps approaches for small teams with limited resources.</p>
+<h2 id="start-simple">Start Simple</h2>
 <p>The most important principle for small teams is to start with minimal complexity:</p>
 <ul>
 <li><strong>Avoid over-engineering:</strong> Begin with simple, reproducible workflows before adding automation</li>
 <li><strong>Focus on fundamentals:</strong> Version control, basic CI/CD, and monitoring are more important than cutting-edge tools</li>
 <li><strong>Incremental adoption:</strong> Add MLOps practices one at a time as your needs grow</li>
 </ul>
-<h2>Essential Components</h2>
+<h2 id="essential-components">Essential Components</h2>
 <p>For small teams, I recommend focusing on these core components:</p>
-<h3>1. Experiment Tracking</h3>
+<h3 id="1-experiment-tracking">1. Experiment Tracking</h3>
 <p>Track your experiments using tools like MLflow or even simple CSV logs. Record:
 - Model parameters
 - Performance metrics
 - Dataset versions
 - Environment details</p>
-<h3>2. Reproducible Environments</h3>
+<h3 id="2-reproducible-environments">2. Reproducible Environments</h3>
 <p>Use Docker containers or at minimum, requirements files with pinned dependencies:</p>
-<p>```bash</p>
-<h1>Create a requirements.txt with exact versions</h1>
-<p>pip freeze &gt; requirements.txt</p>
-<h1>Or use Docker for complete reproducibility</h1>
-<p>FROM python:3.10-slim
-WORKDIR /app
-COPY requirements.txt .
-RUN pip install -r requirements.txt
-COPY . .
-CMD ["python", "serve_model.py"]
-```</p>
-<h3>3. Simplified Deployment Patterns</h3>
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><span style="color: #75715e"># Create a requirements.txt with exact versions</span>
+pip<span style="color: #f8f8f2"> </span>freeze<span style="color: #f8f8f2"> </span>&gt;<span style="color: #f8f8f2"> </span>requirements.txt
+
+<span style="color: #75715e"># Or use Docker for complete reproducibility</span>
+FROM<span style="color: #f8f8f2"> </span>python:3.10-slim
+WORKDIR<span style="color: #f8f8f2"> </span>/app
+COPY<span style="color: #f8f8f2"> </span>requirements.txt<span style="color: #f8f8f2"> </span>.
+RUN<span style="color: #f8f8f2"> </span>pip<span style="color: #f8f8f2"> </span>install<span style="color: #f8f8f2"> </span>-r<span style="color: #f8f8f2"> </span>requirements.txt
+COPY<span style="color: #f8f8f2"> </span>.<span style="color: #f8f8f2"> </span>.
+CMD<span style="color: #f8f8f2"> </span><span style="color: #f92672">[</span><span style="color: #e6db74">&quot;python&quot;</span>,<span style="color: #f8f8f2"> </span><span style="color: #e6db74">&quot;serve_model.py&quot;</span><span style="color: #f92672">]</span>
+</code></pre></div>
+
+<h3 id="3-simplified-deployment-patterns">3. Simplified Deployment Patterns</h3>
 <p>Skip complex serving infrastructure initially in favor of:
 - Simple REST APIs with Flask/FastAPI
 - Batch prediction jobs
 - Model-as-a-function within existing applications</p>
-<h2>Conclusion</h2>
-<p>MLOps doesn't have to be overwhelming. By focusing on the fundamentals and incrementally adding complexity as needed, small teams can achieve many of the benefits of MLOps without enterprise-scale investments. </p>
+<h2 id="conclusion">Conclusion</h2>
+<p>MLOps doesn&rsquo;t have to be overwhelming. By focusing on the fundamentals and incrementally adding complexity as needed, small teams can achieve many of the benefits of MLOps without enterprise-scale investments. </p>
         </main>
         
         <footer>

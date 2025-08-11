@@ -34,7 +34,25 @@ def build_blog_post(source_path, output_path):
     
     # Extract frontmatter and convert markdown to HTML
     metadata, markdown_content = extract_frontmatter(content)
-    html_content = markdown.markdown(markdown_content)
+    # Enable fenced code blocks and useful extensions
+    html_content = markdown.markdown(
+        markdown_content,
+        extensions=[
+            'markdown.extensions.fenced_code',
+            'markdown.extensions.codehilite',
+            'markdown.extensions.tables',
+            'markdown.extensions.toc',
+            'markdown.extensions.sane_lists',
+            'markdown.extensions.smarty',
+        ],
+        extension_configs={
+            'markdown.extensions.codehilite': {
+                'guess_lang': False,
+                'noclasses': True,  # inline styles so no extra CSS is needed
+                'pygments_style': 'monokai'
+            }
+        }
+    )
     
     # Create HTML with template
     title = metadata.get('title', 'Blog Post')

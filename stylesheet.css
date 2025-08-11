@@ -628,6 +628,22 @@ footer {
   background-color: transparent;
 }
 
+/* Improve rendering for syntax-highlighted blocks produced by codehilite */
+.blog-post-content .codehilite {
+  padding: 1rem;
+  border-radius: 2px;
+  overflow-x: auto;
+  margin-bottom: 1.5rem;
+  border-left: 2px solid var(--accent-color);
+}
+
+.blog-post-content .codehilite pre {
+  background: transparent !important;
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
 /* Subtle terminal cursor animation */
 @keyframes blink {
   0%, 100% { opacity: 1; }
