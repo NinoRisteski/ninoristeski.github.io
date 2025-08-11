@@ -93,7 +93,7 @@ The reviewer asked to use `fetch` directly, remove the redundant existence check
 
 I started by running `ruff check` locally to confirm the output matched what CI would see. Then I executed all the examples I'd touched to make sure I hadn't broken anything. As a final test, I opened a throwaway PR that deliberately reintroduced an unused import and watched CI flag it immediately—proof the guardrail was working.
 
-**Tinygrad principle reinforced**: Automate cleanliness: encode standards in CI and keep rules narrow  to maximize signal and prevent drift.
+ 
 
 ---
 
@@ -136,7 +136,7 @@ This turns the fix from a tweak into a rule that holds across modes and dtypes. 
 
 I reproduced the failure with the devectorizer turned off and odd shapes (e.g., `[3, 5]`). After the change, I compared results between modes and across dtypes to ensure they matched within tolerance and the `dtype.min` sentinel behaved as expected.
 
-**Tinygrad principle reinforced:** Make correctness explicit and dtype‑aware; don’t rely on accidental vectorization.
+ 
 
 ---
 
@@ -183,7 +183,7 @@ When I first opened this PR, it was just a straightforward cleanup—remove the 
 
 I started by running `ruff check` locally to confirm the output matched what CI would see. Then I executed all the examples I’d touched to make sure I hadn’t broken anything. As a final test, I opened a throwaway PR that deliberately reintroduced an unused import and watched CI flag it immediately—proof the guardrail was working.
 
-**Principle reinforced:** Automate cleanliness: encode standards in CI and keep rules narrow to maximize signal and prevent drift.
+ 
 
 ---
 
@@ -247,7 +247,7 @@ After feedback, I added a direct Torch comparison in the test when the local ver
 
 I checked shapes and basic invariants with the flag on and off across common head counts, then compared outputs to PyTorch where available (with reasonable tolerances). I also skimmed call sites to ensure the added keyword didn't break existing usage.
 
-**Tinygrad principle**: Mirror upstream semantics when it helps users, keep the surface small, and cover changes with direct tests.
+ 
 
 ---
 

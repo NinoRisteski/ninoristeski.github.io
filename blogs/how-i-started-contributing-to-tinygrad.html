@@ -22,8 +22,7 @@
         </header>
         
         <main class="blog-post-content">
-            <h1 id="how-i-started-contributing-to-tinygrad-my-first-4-merged-prs">How I Started Contributing to tinygrad — My First 4 Merged PRs</h1>
-<p>If you love building from scratch and care about high‑quality code, <em>tinygrad</em> is a great place to get your hands dirty and learn how a deep learning framework works. It&rsquo;s deliberately minimalist—anti‑bloat—so small and clear changes go a long way. This post is the play‑by‑play of my first (4) merged PRs: what I changed, the feedback I got, and the habits that made reviews go smoothly. </p>
+            <p>If you love building from scratch and care about high‑quality code, <em>tinygrad</em> is a great place to get your hands dirty and learn how a deep learning framework works. It&rsquo;s deliberately minimalist—anti‑bloat—so small and clear changes go a long way. This post is the play‑by‑play of my first (4) merged PRs: what I changed, the feedback I got, and the habits that made reviews go smoothly. </p>
 <p>I&rsquo;m writing this because I wished something like this existed when I started — consider it as a small guide I wanted on day one. Along the way I built a tiny side project, <a href="https://github.com/NinoRisteski/tinypilot">tinypilot</a>, to learn tinygrad by doing; if you&rsquo;re starting out, this project can help  you map the codebase faster.</p>
 <p><strong>One ground rule on AI (and code ownership):</strong> use AI to <em>learn</em> the codebase — to map the repo, explain helpers, find related files, and maybe suggest ideas. <strong>Don&rsquo;t</strong> use AI to generate the code you will push. You should understand and own every line in your PR; tinygrad values clarity and intent over volume.</p>
 <p><strong>Before you contribute:</strong></p>
@@ -92,7 +91,6 @@
 <p>The reviewer asked to use <code>fetch</code> directly, remove the redundant existence check, and verify on a clean environment. I also updated the PR title to describe the change precisely and deleted the local helper to avoid drift.</p>
 <p><strong>How I validated</strong></p>
 <p>I started by running <code>ruff check</code> locally to confirm the output matched what CI would see. Then I executed all the examples I&rsquo;d touched to make sure I hadn&rsquo;t broken anything. As a final test, I opened a throwaway PR that deliberately reintroduced an unused import and watched CI flag it immediately—proof the guardrail was working.</p>
-<p><strong>Tinygrad principle reinforced</strong>: Automate cleanliness: encode standards in CI and keep rules narrow  to maximize signal and prevent drift.</p>
 <hr />
 <h2 id="pr-2-fix-logcumsumexp-with-devectorize0-ordering-matters">PR 2 — Fix logcumsumexp with DEVECTORIZE=0 (ordering matters)</h2>
 <p><em>Merged: Jun 21, 2025</em>\
@@ -118,7 +116,6 @@
 <p>This turns the fix from a tweak into a rule that holds across modes and dtypes. The test now covers vectorized and scalarized paths, so refactors won’t quietly reintroduce NaNs.</p>
 <p><strong>How I validated</strong></p>
 <p>I reproduced the failure with the devectorizer turned off and odd shapes (e.g., <code>[3, 5]</code>). After the change, I compared results between modes and across dtypes to ensure they matched within tolerance and the <code>dtype.min</code> sentinel behaved as expected.</p>
-<p><strong>Tinygrad principle reinforced:</strong> Make correctness explicit and dtype‑aware; don’t rely on accidental vectorization.</p>
 <hr />
 <h2 id="pr-3-lint-the-examples-and-keep-them-linted">PR 3 — Lint the examples and keep them linted</h2>
 <p><em>Merged: Jun 30, 2025</em>\
@@ -149,7 +146,6 @@
 <p>When I first opened this PR, it was just a straightforward cleanup—remove the unused imports and call it a day. The reviewer pushed me to go further: if we’re tidying up, let’s make sure the mess doesn’t come back. That meant wiring <code>ruff</code> into CI so it checks <code>examples/</code> on every run. To keep the signal high and avoid a wave of unrelated nitpicks, I narrowed the rule to just F401 (unused imports). I also updated the <code>src</code> paths in the config so <code>examples/</code> actually gets linted in CI.</p>
 <p><strong>How I validated</strong></p>
 <p>I started by running <code>ruff check</code> locally to confirm the output matched what CI would see. Then I executed all the examples I’d touched to make sure I hadn’t broken anything. As a final test, I opened a throwaway PR that deliberately reintroduced an unused import and watched CI flag it immediately—proof the guardrail was working.</p>
-<p><strong>Principle reinforced:</strong> Automate cleanliness: encode standards in CI and keep rules narrow to maximize signal and prevent drift.</p>
 <hr />
 <h2 id="pr-4-add-enable_gqa-to-sdpa-tests">PR 4 — Add <code>enable_gqa</code> to SDPA (+ tests)</h2>
 <p><em>Merged: Jul 7, 2025</em>\
@@ -197,7 +193,6 @@
 <p>After feedback, I added a direct Torch comparison in the test when the local version exposes <code>enable_gqa</code>, cleaned up small style issues, and noted the supported Torch versions in the PR text so the test wouldn&rsquo;t flap depending on the environment.</p>
 <p><strong>How I validated</strong></p>
 <p>I checked shapes and basic invariants with the flag on and off across common head counts, then compared outputs to PyTorch where available (with reasonable tolerances). I also skimmed call sites to ensure the added keyword didn&rsquo;t break existing usage.</p>
-<p><strong>Tinygrad principle</strong>: Mirror upstream semantics when it helps users, keep the surface small, and cover changes with direct tests.</p>
 <hr />
 <h2 id="summary">Summary</h2>
 <p>If you&rsquo;re looking for the shortest path to your first contribution, it&rsquo;s this: Don&rsquo;t search shortcuts. Read the code and tests, start tiny, and make changes that are easy to verify. Use AI to learn the map of the repo, not to write your diff. Arrive with a clear problem statement, a minimal fix, and proof it works.</p>
