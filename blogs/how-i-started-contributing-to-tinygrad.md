@@ -42,7 +42,7 @@ I'm writing this because I wished something like this existed when I started —
 ## PR 1 — Prefer the built‑in `fetch` over ad‑hoc download glue
 
 *Merged: Jun 19, 2025*\
-([#10877])
+([#10877](https://github.com/tinygrad/tinygrad/pull/10877))
 
 **The situation**: While reading the codebase to understand how things fit together, I found an example that used a local `download_file` plus an `os.path.isfile` check. It worked, but it duplicated what *tinygrad* already provides with `fetch`.
 
@@ -97,10 +97,100 @@ I started by running `ruff check` locally to confirm the output matched what CI 
 
 ---
 
+## PR 2 — Fix logcumsumexp with DEVECTORIZE=0 (ordering matters)
+
+*Merged: Jun 21, 2025*\
+([#10880](https://github.com/tinygrad/tinygrad/pull/10880))
+
+**Discovery:** I first saw the failure in the tinygrad Discord (#bug-reports), reported by George Hotz. I reproduced it locally and traced it through the logcumsumexp path.
+
+**The bug:** With the devectorizer disabled, masked terms were hitting `exp` first, triggering `inf * 0 -> NaN` — a classic “mask too late” issue.
+
+> Review note: “Use a principled sentinel (dtype‑aware) and explain why it only appears with DEVECTORIZE=0.”
+
+**The change:** apply the mask before `exp`, and replace the magic constant with `dtype.min`.
+
+**Before**
+
+```python
+ret = ((x_expand - x_cummax).exp() * mask).sum(-1).log() + x_cummax.squeeze(-1)
+```
+
+**After**
+
+```python
+ret = mask.where(x_expand - x_cummax, dtypes.min(self.dtype)).exp().sum(-1).log() + x_cummax.squeeze(-1)
+```
+
+Masking before `exp` makes the result independent of execution order. Whether the kernel runs vectorized or scalarized, the “inf * 0” path doesn’t exist anymore. Using `dtype.min` also removes guesswork: it gives each dtype a sensible floor, so the logic holds for float16, bfloat16, and float32 without quiet overflows. Keeping huge values away from `exp` avoids NaNs from leaking into later ops. And because different devices can reorder work under the hood, doing the mask first keeps behavior consistent on CPU and GPU.
+
+**What the review changed**
+
+I proposed a large negative constant; review pushed me to use `dtype.min` instead, which ties the sentinel to the actual numeric range of the dtype. I also explained in the PR why only `DEVECTORIZE=0` exposed the bug: scalarization changes evaluation order, so `exp` can run before the mask and create the `inf * 0` path.
+
+**Why it matters**
+
+This turns the fix from a tweak into a rule that holds across modes and dtypes. The test now covers vectorized and scalarized paths, so refactors won’t quietly reintroduce NaNs.
+
+**How I validated**
+
+I reproduced the failure with the devectorizer turned off and odd shapes (e.g., `[3, 5]`). After the change, I compared results between modes and across dtypes to ensure they matched within tolerance and the `dtype.min` sentinel behaved as expected.
+
+**Tinygrad principle reinforced:** Make correctness explicit and dtype‑aware; don’t rely on accidental vectorization.
+
+---
+
+## PR 3 — Lint the examples and keep them linted
+
+*Merged: Jun 30, 2025*\
+([#11024](https://github.com/tinygrad/tinygrad/pull/11024))
+
+**Discovery:** While skimming `examples/`, I noticed a few files importing things they never used. Easy to fix — but without CI, the noise would come back.
+
+> Review note: “We don’t lint this directory. If we’re cleaning it, wire CI so it stays clean.”
+
+**The change:** remove unused imports and extend `ruff` to check `examples/`, limiting it to unused‑import warnings to keep the signal high.
+
+**Before (snippet)**
+
+```python
+import os
+import json  # unused
+import numpy as np  # unused
+```
+
+**After**
+
+```python
+import os
+```
+
+**Ruff config delta (conceptually)**
+
+```toml
+[tool.ruff]
+extend-select = ["F401"]  # unused imports only
+src = ["tinygrad", "examples"]
+```
+
+Hooking the linter to CI is what keeps the cleanup from drifting. By limiting the rule to unused imports (F401), we keep the signal high without inviting a wall of nitpicks. Dropping stray imports also trims a bit of startup and memory in small scripts—tiny on its own, noticeable over many runs. Most importantly, the CI job makes the standard visible, so new patches arrive clean by default.
+
+**What the review changed**
+
+When I first opened this PR, it was just a straightforward cleanup—remove the unused imports and call it a day. The reviewer pushed me to go further: if we’re tidying up, let’s make sure the mess doesn’t come back. That meant wiring `ruff` into CI so it checks `examples/` on every run. To keep the signal high and avoid a wave of unrelated nitpicks, I narrowed the rule to just F401 (unused imports). I also updated the `src` paths in the config so `examples/` actually gets linted in CI.
+
+**How I validated**
+
+I started by running `ruff check` locally to confirm the output matched what CI would see. Then I executed all the examples I’d touched to make sure I hadn’t broken anything. As a final test, I opened a throwaway PR that deliberately reintroduced an unused import and watched CI flag it immediately—proof the guardrail was working.
+
+**Principle reinforced:** Automate cleanliness: encode standards in CI and keep rules narrow to maximize signal and prevent drift.
+
+---
+
 ## PR 4 — Add `enable_gqa` to SDPA (+ tests)
 
 *Merged: Jul 7, 2025*\
-([#11097])
+([#11097](https://github.com/tinygrad/tinygrad/pull/11097))
 
 **Discovery:** I learned tinygrad was missing the `enable_gqa` knob (Grouped-Query Attention) from a Discord post where George Hotz pointed out that SDPA should have `enable_gqa`. That call-out made the gap obvious and pushed me to wire it up.&#x20;
 
