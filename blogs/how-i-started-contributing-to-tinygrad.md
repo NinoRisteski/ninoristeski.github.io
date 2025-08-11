@@ -6,7 +6,9 @@ excerpt: A play-by-play guide to my first merged PRs in tinygrad: what I changed
 
 # How I Started Contributing to tinygrad — My First 4 Merged PRs
 
-![Merged PRs overview](../images/tinygrad-prs-screenshot.png)
+<div class="hero-image">
+  <img src="../images/tinygrad-prs-screenshot.png" alt="Merged PRs overview" />
+</div>
 
 If you love building from scratch and care about high‑quality code, *tinygrad* is a great place to get your hands dirty and learn how a deep learning framework works. It's deliberately minimalist—anti‑bloat—so small and clear changes go a long way. This post is the play‑by‑play of my first (4) merged PRs: what I changed, the feedback I got, and the habits that made reviews go smoothly. 
 

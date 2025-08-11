@@ -628,6 +628,20 @@ footer {
   background-color: transparent;
 }
 
+/* Center and constrain hero images inside blog posts */
+.blog-post-content .hero-image {
+  display: flex;
+  justify-content: center;
+  margin: 1.25rem 0 2rem;
+}
+
+.blog-post-content .hero-image img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.35);
+}
+
 /* Improve rendering for syntax-highlighted blocks produced by codehilite */
 .blog-post-content .codehilite {
   padding: 1rem;
