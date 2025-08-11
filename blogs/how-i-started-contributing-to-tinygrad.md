@@ -1,6 +1,6 @@
 ---
 title: How I Started Contributing to tinygrad — My First 4 Merged PRs
-date: 2025-01-25
+date: 2025-08-11
 excerpt: A play-by-play guide to my first merged PRs in tinygrad: what I changed, the feedback I got, and the habits that made reviews go smoothly.
 ---
 
