@@ -1,10 +1,10 @@
 ---
-title: How I Started Contributing to tinygrad (A Technical, Conversational Guide)
+title: How I Started Contributing to tinygrad — My First 4 Merged PRs
 date: 2025-01-25
 excerpt: A play-by-play guide to my first merged PRs in tinygrad: what I changed, the feedback I got, and the habits that made reviews go smoothly.
 ---
 
-# How I Started Contributing to tinygrad (A Technical, Conversational Guide)
+# How I Started Contributing to tinygrad — My First 4 Merged PRs
 
 If you love building from scratch and care about high‑quality code, *tinygrad* is a great place to get your hands dirty and learn how a deep learning framework works. It's deliberately minimalist—anti‑bloat—so small and clear changes go a long way. This post is the play‑by‑play of my first (4) merged PRs: what I changed, the feedback I got, and the habits that made reviews go smoothly. 
 
