@@ -349,6 +349,10 @@ header {
   margin-bottom: 0.3rem;
 }
 
+.blog-post h3 a {
+  color: var(--primary-color);
+}
+
 .blog-post .post-date {
   display: inline-block;
   font-size: 0.75rem;
@@ -390,6 +394,10 @@ header {
 
 .project h3 {
   margin-top: 0;
+}
+
+.project h3 a {
+  color: var(--primary-color);
 }
 
 .project-link {
