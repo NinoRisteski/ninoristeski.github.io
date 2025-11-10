@@ -5,8 +5,8 @@
 :root {
   --primary-color: #ffffff;
   --secondary-color: #ffffff;
-  --background-color: #000033;
-  --text-color: #ffffff;
+  --background-color: #f6f7fb;
+  --text-color: #000000;
   --accent-color: #ffffff;
   --error-color: #ffffff;
   --success-color: #ffffff;
@@ -23,7 +23,7 @@
   --font-body: 'Inter', sans-serif;
   --accent-glow: rgba(255, 255, 255, 0.15);
   --secondary-dark: #000022;
-  --bg-color: #000033;
+  --bg-color: #f6f7fb;
   --card-bg: rgba(0, 0, 51, 0.6);
   --title-font: 'Chakra Petch', sans-serif;
   --body-font: 'Share Tech Mono', monospace;
@@ -287,7 +287,7 @@ header {
   padding: 0.5rem 1rem;
   position: relative;
   letter-spacing: 0.03em;
-  color: rgba(255, 255, 255, 0.9);
+  color: rgba(0, 0, 0, 0.85);
   font-family: var(--font-heading);
   font-weight: 300;
 }
@@ -352,7 +352,7 @@ header {
 .blog-post .post-date {
   display: inline-block;
   font-size: 0.75rem;
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(0, 0, 0, 0.6);
   font-family: var(--font-heading);
   margin-bottom: 0.5rem;
   letter-spacing: 0.05em;
