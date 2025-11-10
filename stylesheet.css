@@ -3,8 +3,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
 :root {
-  --primary-color: #ffffff;
-  --secondary-color: #ffffff;
+  --primary-color: #000000;
+  --secondary-color: #000000;
   --background-color: #f6f7fb;
   --text-color: #000000;
   --accent-color: #ffffff;
