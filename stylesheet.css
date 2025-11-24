@@ -7,7 +7,7 @@
   --secondary-color: #000000;
   --background-color: #f6f7fb;
   --text-color: #000000;
-  --accent-color: #ffffff;
+  --accent-color: #000000;
   --error-color: #ffffff;
   --success-color: #ffffff;
   --warning-color: #ffffff;
@@ -15,7 +15,7 @@
   --link-color: #ffffff;
   --link-hover-color: #4DABF7;
   --link-active-color: #74C0FC;
-  --border-color: rgba(255, 255, 255, 0.2);
+  --border-color: rgba(0, 0, 0, 0.2);
   --shadow-color: rgba(255, 255, 255, 0.1);
   --gradient-start: #ffffff;
   --gradient-end: #ffffff;
@@ -333,7 +333,7 @@ header {
   margin-bottom: 0.4rem;
   padding: 0.25rem 0;
   position: relative;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   transition: opacity 0.2s ease;
 }
 
@@ -430,7 +430,7 @@ header {
   margin-bottom: 0.25rem;
   padding: 0.25rem 0;
   transition: opacity 0.2s ease;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .recommendations-list li:hover {
