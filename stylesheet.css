@@ -1,5 +1,5 @@
 /* Blade Runner 2049 inspired minimalist styling */
-@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500&family=Merriweather:wght@300;400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
 :root {
@@ -19,15 +19,15 @@
   --shadow-color: rgba(255, 255, 255, 0.1);
   --gradient-start: #ffffff;
   --gradient-end: #ffffff;
-  --font-heading: 'Space Mono', monospace;
-  --font-body: 'Inter', sans-serif;
+  --font-heading: 'Merriweather', serif;
+  --font-body: 'Merriweather', serif;
   --accent-glow: rgba(255, 255, 255, 0.15);
   --secondary-dark: #000022;
   --bg-color: #DCD1BE;
   --card-bg: rgba(0, 0, 51, 0.6);
-  --title-font: 'Chakra Petch', sans-serif;
-  --body-font: 'Share Tech Mono', monospace;
-  --font-body: 'Courier New', monospace;
+  --title-font: 'Merriweather', serif;
+  --body-font: 'Merriweather', serif;
+  --font-body: 'Merriweather', serif;
 }
 
 body {
