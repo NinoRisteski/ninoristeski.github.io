@@ -92,12 +92,12 @@ p {
 a {
   color: var(--link-color);
   text-decoration: none;
-  transition: all 0.2s ease;
+  transition: color 0.2s ease;
   position: relative;
 }
 
 a:hover {
-  color: var(--link-hover-color);
+  color: #ff0000;
 }
 
 a:active {
@@ -112,7 +112,7 @@ a:not(.social-links a):after {
   height: 1px;
   bottom: -2px;
   left: 0;
-  background-color: var(--link-hover-color);
+  background-color: #ff0000;
   transition: width 0.3s ease;
 }
 
@@ -261,7 +261,7 @@ header {
 }
 
 .social-links a:hover {
-  color: var(--link-hover-color);
+  color: #ff0000;
 }
 
 /* Blog section */
