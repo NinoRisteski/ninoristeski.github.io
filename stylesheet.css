@@ -190,11 +190,6 @@ header {
   height: 100%;
   object-fit: cover;
   filter: grayscale(100%);
-  transition: filter 0.3s ease;
-}
-
-.profile-image img:hover {
-  filter: grayscale(0%);
 }
 
 .name-title {
