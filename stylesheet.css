@@ -248,11 +248,16 @@ header {
   padding: 0;
   border: none;
   border-radius: 0;
-  transition: color 0.2s ease;
+  transition: none;
   background-color: transparent;
   font-size: 0.65rem;
   letter-spacing: 0.05em;
   color: #000000;
+}
+
+.social-links a::after {
+  content: " ↗";
+  font-size: 0.6em;
 }
 
 .social-links a:hover {
