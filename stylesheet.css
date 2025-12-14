@@ -120,6 +120,11 @@ a:not(.social-links a):hover:after {
   width: 100%;
 }
 
+.link-arrow::after {
+  content: ' ↗';
+  font-size: 0.6em;
+}
+
 /* Project links hover effect */
 .project h3 a:hover,
 .project h3 a:active,
@@ -276,8 +281,8 @@ header {
 
 /* Projects section */
 .projects-grid {
-  display: grid;
-  grid-template-columns: 1fr;
+  display: flex;
+  flex-direction: column;
   gap: 1rem;
 }
 
@@ -382,11 +387,6 @@ footer {
   
   body {
     font-size: 12.5px;
-  }
-  
-  .projects-grid {
-    grid-template-columns: 1fr;
-    gap: 1rem;
   }
   
   .header-content {
