@@ -96,6 +96,12 @@ a {
   position: relative;
 }
 
+a::after {
+  content: ' ↗';
+  font-size: 0.6em;
+  margin-left: 0.15em;
+}
+
 a:hover {
   color: #ff0000;
 }
@@ -105,7 +111,7 @@ a:active {
 }
 
 /* Add underline effect on hover */
-a:not(.social-links a):after {
+a:not(.social-links a)::before {
   content: '';
   position: absolute;
   width: 0;
@@ -116,13 +122,8 @@ a:not(.social-links a):after {
   transition: width 0.3s ease;
 }
 
-a:not(.social-links a):hover:after {
+a:not(.social-links a):hover::before {
   width: 100%;
-}
-
-.link-arrow::after {
-  content: ' ↗';
-  font-size: 0.6em;
 }
 
 /* Project links hover effect */
@@ -233,11 +234,6 @@ header {
   color: #000000;
 }
 
-.social-links a::after {
-  content: " ↗";
-  font-size: 0.6em;
-}
-
 .social-links a:hover {
   color: #ff0000;
 }
@@ -321,6 +317,10 @@ header {
   margin-bottom: 0.35rem;
   line-height: 1.4;
   font-size: 0.85rem;
+}
+
+.project-commits a {
+  color: var(--primary-color);
 }
 
 .project-link {
