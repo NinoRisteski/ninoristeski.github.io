@@ -44,15 +44,8 @@
       <h2>Projects</h2>
       <div class="projects-grid">
         <div class="project">
-          <h3>Tinygrad</h3>
-          <ul class="project-commits">
-            <li><a href="https://github.com/tinygrad/tinygrad/pull/13598"><strong>optim empty shard #13513</strong></a> (Dec 2025) — optimized empty shards so the distributed optimizer skips useless work.</li>
-            <li><a href="https://github.com/tinygrad/tinygrad/pull/11678"><strong>rope cache optim for jit prune in llm.py</strong></a> (Aug 2025) — cached ROPE calculations so the JIT prune path reuses angles instead of recomputing them.</li>
-            <li><a href="https://github.com/tinygrad/tinygrad/pull/11097"><strong>adding enable_gqa in SDPA</strong></a> (Jul 2025) — added PyTorch-style grouped query attention plus coverage.</li>
-            <li><a href="https://github.com/tinygrad/tinygrad/pull/11024"><strong>clean up unused imports in examples and update CI linting</strong></a> (Jun 2025) — cleaned unused imports and wired Ruff so examples stay linted.</li>
-            <li><a href="https://github.com/tinygrad/tinygrad/pull/10880"><strong>fix test logcumsumexp broken devectorize=0</strong></a> (Jun 2025) — masked before `exp` and used dtype-aware sentinels to stop NaNs.</li>
-            <li><a href="https://github.com/tinygrad/tinygrad/pull/10877"><strong>small fix replacing download_file with fetch</strong></a> (Jun 2025) — swapped ad-hoc download glue with the canonical `fetch` helper.</li>
-          </ul>
+          <h3><a href="https://github.com/NinoRisteski/METAL_SGEMM_M4">METAL_SGEMM_M4</a></h3>
+          <p>Metal compute shader experiments for SGEMM (4x4 tiles) that explore Apple GPU optimization and benchmarking.</p>
         </div>
         <div class="project">
           <h3><a href="https://github.com/NinoRisteski/tinypilot">TinyPilot</a></h3>
@@ -63,8 +56,15 @@
           <p>Ask Dr. Andrew Huberman questions and receive answers directly from his podcast episodes.</p>
         </div>
         <div class="project">
-          <h3><a href="https://github.com/NinoRisteski/METAL_SGEMM_M4">METAL_SGEMM_M4</a></h3>
-          <p>Metal compute shader experiments for SGEMM (4x4 tiles) that explore Apple GPU optimization and benchmarking.</p>
+          <h3>Tinygrad</h3>
+          <ul class="project-commits">
+            <li><a href="https://github.com/tinygrad/tinygrad/pull/13598"><strong>optim empty shard #13513</strong></a> (Dec 2025) — optimized empty shards so the distributed optimizer skips useless work.</li>
+            <li><a href="https://github.com/tinygrad/tinygrad/pull/11678"><strong>rope cache optim for jit prune in llm.py</strong></a> (Aug 2025) — cached ROPE calculations so the JIT prune path reuses angles instead of recomputing them.</li>
+            <li><a href="https://github.com/tinygrad/tinygrad/pull/11097"><strong>adding enable_gqa in SDPA</strong></a> (Jul 2025) — added PyTorch-style grouped query attention plus coverage.</li>
+            <li><a href="https://github.com/tinygrad/tinygrad/pull/11024"><strong>clean up unused imports in examples and update CI linting</strong></a> (Jun 2025) — cleaned unused imports and wired Ruff so examples stay linted.</li>
+            <li><a href="https://github.com/tinygrad/tinygrad/pull/10880"><strong>fix test logcumsumexp broken devectorize=0</strong></a> (Jun 2025) — masked before `exp` and used dtype-aware sentinels to stop NaNs.</li>
+            <li><a href="https://github.com/tinygrad/tinygrad/pull/10877"><strong>small fix replacing download_file with fetch</strong></a> (Jun 2025) — swapped ad-hoc download glue with the canonical `fetch` helper.</li>
+          </ul>
         </div>
       </div>
     </section>
