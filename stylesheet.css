@@ -210,7 +210,7 @@ header {
 
 .name-title .social-links a {
   font-size: 0.58rem;
-  padding: 0.25rem 0.7rem;
+  padding: 0;
 }
 
 .name-title div {
@@ -251,19 +251,18 @@ header {
 .social-links a {
   font-family: var(--font-heading);
   font-weight: 500;
-  padding: 0.3rem 0.85rem;
-  border: 1px solid var(--border-color);
-  border-radius: 2px;
-  transition: all 0.3s ease;
-  background-color: rgba(255, 255, 255, 0.03);
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  transition: color 0.2s ease;
+  background-color: transparent;
   font-size: 0.65rem;
   letter-spacing: 0.05em;
   color: #000000;
 }
 
 .social-links a:hover {
-  background-color: rgba(255, 255, 255, 0.08);
-  border-color: var(--accent-color);
+  color: var(--link-hover-color);
 }
 
 /* Blog section */
@@ -476,7 +475,7 @@ footer {
   
   .name-title .social-links a {
     font-size: 0.55rem;
-    padding: 0.25rem 0.7rem;
+    padding: 0;
   }
   
   .blog-post-content {
