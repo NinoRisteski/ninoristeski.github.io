@@ -176,7 +176,7 @@ header {
 }
 
 .name-title .social-links a {
-  font-size: 0.58rem;
+  font-size: 0.72rem;
   padding: 0;
 }
 
@@ -223,7 +223,7 @@ header {
   border-radius: 0;
   transition: none;
   background-color: transparent;
-  font-size: 0.65rem;
+  font-size: 0.78rem;
   letter-spacing: 0.05em;
   color: #000000;
 }
@@ -446,7 +446,7 @@ footer {
   }
   
   .name-title .social-links a {
-    font-size: 0.55rem;
+    font-size: 0.65rem;
     padding: 0;
   }
   
