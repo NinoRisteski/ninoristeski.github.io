@@ -66,13 +66,13 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-  font-size: 1.4rem;
+  font-size: 1.3rem;
   margin-bottom: 0.5rem;
   letter-spacing: 0.05em;
 }
 
 h2 {
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   margin: 0.8rem 0 0.5rem 0;
   padding-bottom: 0.25rem;
   border-bottom: 1px solid var(--border-color);
@@ -397,7 +397,7 @@ footer {
 /* Responsive adjustments */
 @media (min-width: 768px) {
   h1 {
-    font-size: 2rem;
+    font-size: 1.8rem;
   }
   
   body {
@@ -424,11 +424,11 @@ footer {
   }
   
   h1 {
-    font-size: 1.4rem;
+    font-size: 1.3rem;
   }
   
   h2 {
-    font-size: 1.1rem;
+    font-size: 1rem;
   }
   
   h3 {
@@ -633,7 +633,7 @@ body::before {
 }
 
 section > h2 {
-  font-size: 1.4rem;
+  font-size: 1.25rem;
   margin: 0.75rem 0 0.85rem;
   position: relative;
   display: inline-block;
