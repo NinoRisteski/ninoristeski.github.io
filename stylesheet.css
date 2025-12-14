@@ -121,21 +121,11 @@ a:not(.social-links a):hover:after {
 }
 
 /* Project links hover effect */
-.project h3 a:hover {
-  color: var(--link-hover-color);
-}
-
-.project h3 a:active {
-  color: var(--link-active-color);
-}
-
-/* Blog post links hover effect */
-.blog-post h3 a:hover {
-  color: var(--link-hover-color);
-}
-
+.project h3 a:hover,
+.project h3 a:active,
+.blog-post h3 a:hover,
 .blog-post h3 a:active {
-  color: var(--link-active-color);
+  color: inherit;
 }
 
 /* Header with profile image */
