@@ -209,18 +209,38 @@ header {
 }
 
 .section-break {
-  width: 80%;
-  max-width: 420px;
-  height: 8px;
-  margin: 1.5rem auto 1.1rem;
+  position: relative;
+  width: 85%;
+  max-width: 480px;
+  height: 24px;
+  margin: 1.4rem auto 1.15rem;
+}
+
+.section-break::before,
+.section-break::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  border-radius: 999px;
   background-image: repeating-linear-gradient(
     90deg,
-    rgba(0, 0, 0, 0.65) 0 14px,
-    rgba(0, 0, 0, 0.15) 14px 24px
+    rgba(0, 0, 0, 0.75) 0 12px,
+    rgba(0, 0, 0, 0.35) 12px 20px
   );
-  border-radius: 4px;
-  transform: skewX(-18deg);
-  opacity: 0.8;
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0.25);
+}
+
+.section-break::before {
+  top: 6px;
+  transform: rotate(-2deg);
+}
+
+.section-break::after {
+  bottom: 6px;
+  transform: rotate(2deg);
+  opacity: 0.65;
 }
 
 .intro::before,
