@@ -210,37 +210,33 @@ header {
 
 .section-break {
   position: relative;
-  width: 85%;
-  max-width: 480px;
-  height: 24px;
-  margin: 1.4rem auto 1.15rem;
+  width: 20px;
+  height: 30px;
+  margin: 1.5rem auto 1.2rem;
 }
 
 .section-break::before,
 .section-break::after {
   content: '';
   position: absolute;
-  left: 0;
-  right: 0;
-  height: 2px;
-  border-radius: 999px;
-  background-image: repeating-linear-gradient(
-    90deg,
-    rgba(0, 0, 0, 0.75) 0 12px,
-    rgba(0, 0, 0, 0.35) 12px 20px
-  );
-  box-shadow: 0 0 1px rgba(0, 0, 0, 0.25);
+  left: 50%;
+  background-color: rgba(0, 0, 0, 0.75);
+  transform: translateX(-50%);
 }
 
 .section-break::before {
-  top: 6px;
-  transform: rotate(-2deg);
+  width: 2px;
+  height: 14px;
+  top: 4px;
+  border-radius: 999px;
 }
 
 .section-break::after {
-  bottom: 6px;
-  transform: rotate(2deg);
-  opacity: 0.65;
+  width: 6px;
+  height: 6px;
+  bottom: 4px;
+  border-radius: 50%;
+  opacity: 0.75;
 }
 
 .intro::before,
@@ -319,7 +315,7 @@ header {
 
 .project {
   padding: 0.35rem 0;
-  border-bottom: 1px solid var(--accent-color);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.35);
   padding-bottom: 0.5rem;
   position: relative;
 }
@@ -331,7 +327,7 @@ header {
   left: 0;
   width: 60%;
   height: 1px;
-  background: linear-gradient(90deg, var(--accent-color), transparent);
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.5), transparent);
 }
 
 .project h3 {
