@@ -208,12 +208,18 @@ header {
   font-weight: 300;
 }
 
-.section-divider {
-  width: 100%;
-  max-width: 650px;
-  margin: 1.25rem auto;
-  border: none;
-  border-top: 1px solid var(--border-color);
+.section-break {
+  width: 80%;
+  max-width: 420px;
+  height: 8px;
+  margin: 1.5rem auto 1.1rem;
+  background-image: repeating-linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.65) 0 14px,
+    rgba(0, 0, 0, 0.15) 14px 24px
+  );
+  border-radius: 4px;
+  transform: skewX(-18deg);
   opacity: 0.8;
 }
 
