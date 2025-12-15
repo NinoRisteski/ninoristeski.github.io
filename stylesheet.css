@@ -75,7 +75,6 @@ h2 {
   font-size: 1.05rem;
   margin: 0.8rem 0 0.5rem 0;
   padding-bottom: 0.25rem;
-  border-bottom: 1px solid var(--border-color);
 }
 
 h3 {
@@ -256,12 +255,7 @@ header {
 
 .blog-list li {
   margin-bottom: 0.15rem;
-  padding: 0.2rem 0;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-.blog-list li:last-child {
-  border-bottom: none;
+  padding: 0.2rem 0 0.4rem;
 }
 
 .blog-list a {
@@ -293,19 +287,8 @@ header {
 
 .project {
   padding: 0.35rem 0;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.35);
   padding-bottom: 0.5rem;
   position: relative;
-}
-
-.project::after {
-  content: "";
-  position: absolute;
-  bottom: -1px;
-  left: 0;
-  width: 60%;
-  height: 1px;
-  background: linear-gradient(90deg, rgba(0, 0, 0, 0.5), transparent);
 }
 
 .project h3 {
@@ -360,17 +343,12 @@ header {
 
 .recommendations-list li {
   margin-bottom: 0.15rem;
-  padding: 0.2rem 0;
+  padding: 0.2rem 0 0.4rem;
   transition: opacity 0.2s ease;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .recommendations-list li:hover {
   opacity: 0.9;
-}
-
-.recommendations-list li:last-child {
-  border-bottom: none;
 }
 
 .recommendations-list a {
