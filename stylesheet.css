@@ -208,6 +208,15 @@ header {
   font-weight: 300;
 }
 
+.section-divider {
+  width: 100%;
+  max-width: 650px;
+  margin: 1.25rem auto;
+  border: none;
+  border-top: 1px solid var(--border-color);
+  opacity: 0.8;
+}
+
 .intro::before,
 .intro::after {
   display: none;
