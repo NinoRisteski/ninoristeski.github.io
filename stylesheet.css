@@ -210,33 +210,11 @@ header {
 
 .section-break {
   position: relative;
-  width: 20px;
-  height: 30px;
-  margin: 1.5rem auto 1.2rem;
-}
-
-.section-break::before,
-.section-break::after {
-  content: '';
-  position: absolute;
-  left: 50%;
-  background-color: rgba(0, 0, 0, 0.75);
-  transform: translateX(-50%);
-}
-
-.section-break::before {
-  width: 2px;
-  height: 14px;
-  top: 4px;
-  border-radius: 999px;
-}
-
-.section-break::after {
-  width: 6px;
-  height: 6px;
-  bottom: 4px;
-  border-radius: 50%;
-  opacity: 0.75;
+  width: 80%;
+  max-width: 520px;
+  height: 1px;
+  margin: 1.35rem auto 1.1rem;
+  background-color: rgba(0, 0, 0, 0.45);
 }
 
 .intro::before,
