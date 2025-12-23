@@ -217,7 +217,6 @@ header {
 }
 
 .newsletter {
-  border: 1px solid var(--border-color);
   padding: 0.55rem 0.7rem 0.5rem;
   margin: 0 auto 0.85rem;
   max-width: 640px;
