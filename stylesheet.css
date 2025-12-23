@@ -216,6 +216,43 @@ header {
   background-color: rgba(0, 0, 0, 0.45);
 }
 
+.newsletter {
+  border: 1px solid var(--border-color);
+  padding: 0.85rem 0.9rem 0.75rem;
+  margin: 0 auto 1.2rem;
+  max-width: 640px;
+  text-align: center;
+}
+
+.newsletter-intro {
+  font-size: 0.85rem;
+  margin-bottom: 0.6rem;
+  color: rgba(0, 0, 0, 0.75);
+}
+
+.newsletter-cta {
+  display: inline-block;
+  padding: 0.45rem 0.85rem;
+  border: 1px solid var(--border-color);
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-color);
+}
+
+.newsletter-cta:hover {
+  border-color: var(--link-hover-color);
+  color: #ff0000;
+}
+
+.newsletter-note {
+  margin-top: 0.5rem;
+  font-size: 0.7rem;
+  color: rgba(0, 0, 0, 0.6);
+  letter-spacing: 0.03em;
+}
+
 .intro::before,
 .intro::after {
   display: none;
