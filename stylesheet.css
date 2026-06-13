@@ -242,13 +242,9 @@ header {
 .intro {
   position: relative;
   width: min(100%, 670px);
-  padding: 0.82rem 0.95rem 0.72rem 1.1rem;
-  border: 1px solid var(--strong-border-color);
-  border-left: 4px solid var(--accent-color);
-  background:
-    linear-gradient(90deg, rgba(184, 23, 23, 0.055), transparent 38%),
-    rgba(251, 250, 247, 0.72);
-  box-shadow: 4px 5px 0 rgba(17, 16, 14, 0.08);
+  padding: 0.85rem 1rem 0.8rem;
+  border: 1px solid var(--border-color);
+  background: #ffffff;
   color: rgba(17, 16, 14, 0.85);
   font-size: 0.86rem;
   line-height: 1.55;
@@ -257,8 +253,8 @@ header {
 
 .intro-label {
   display: inline-block;
-  margin-bottom: 0.4rem;
-  color: var(--accent-color);
+  margin-bottom: 0.35rem;
+  color: var(--muted-color);
   font-size: 0.64rem;
   font-weight: 700;
   letter-spacing: 0.12em;
@@ -280,17 +276,15 @@ header {
 }
 
 .research-line {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 0.65rem;
-  align-items: baseline;
   margin-top: 0.55rem;
   padding-top: 0.55rem;
   border-top: 1px solid var(--border-color);
 }
 
 .research-line span {
-  color: var(--secondary-accent);
+  display: block;
+  margin-bottom: 0.18rem;
+  color: var(--accent-color);
   font-size: 0.62rem;
   font-weight: 700;
   letter-spacing: 0.1em;
