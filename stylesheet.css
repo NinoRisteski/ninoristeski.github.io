@@ -254,6 +254,45 @@ header {
   margin-bottom: 0.6rem;
 }
 
+.focus-strip {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.35rem;
+  max-width: 650px;
+  margin-top: 0.55rem;
+}
+
+.focus-strip span,
+.focus-strip strong,
+.tag-row span,
+.list-tag,
+.section-count {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.35rem;
+  border: 1px solid var(--border-color);
+  font-size: 0.62rem;
+  line-height: 1;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.focus-strip span {
+  padding: 0.2rem 0.45rem;
+  border-color: rgba(184, 23, 23, 0.3);
+  background: var(--accent-soft);
+  color: var(--accent-color);
+  font-weight: 700;
+}
+
+.focus-strip strong {
+  padding: 0.2rem 0.5rem;
+  background: rgba(234, 223, 204, 0.44);
+  color: rgba(17, 16, 14, 0.78);
+  font-weight: 700;
+}
+
 .newsletter {
   display: flex;
   align-items: center;
@@ -318,6 +357,16 @@ section > h2 {
   margin-bottom: 0.65rem;
 }
 
+.section-count {
+  min-height: 1.2rem;
+  padding: 0.12rem 0.34rem;
+  border-color: rgba(163, 106, 19, 0.38);
+  background: rgba(163, 106, 19, 0.1);
+  color: var(--gold-accent);
+  font-size: 0.58rem;
+  letter-spacing: 0.04em;
+}
+
 section > h2::before {
   content: '0' counter(section);
   width: auto;
@@ -368,6 +417,22 @@ section > h2::after {
   color: rgba(17, 16, 14, 0.78);
 }
 
+.tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.28rem;
+  margin: 0.12rem 0 0.34rem;
+}
+
+.tag-row span {
+  min-height: 1.22rem;
+  padding: 0.16rem 0.36rem;
+  border-color: rgba(31, 79, 122, 0.28);
+  background: var(--secondary-soft);
+  color: var(--secondary-accent);
+  font-size: 0.58rem;
+}
+
 .item-kicker,
 .post-date,
 .item-note {
@@ -415,7 +480,7 @@ section > h2::after {
 .blog-list li,
 .recommendations-list li {
   display: grid;
-  grid-template-columns: 0.65rem 1fr auto;
+  grid-template-columns: 0.65rem 1fr auto auto;
   gap: 0.12rem 1rem;
   padding: 0.52rem 0;
   border-bottom: 1px solid var(--border-color);
@@ -439,10 +504,24 @@ section > h2::after {
 }
 
 .blog-list .post-date {
-  grid-column: 3;
+  grid-column: 4;
   grid-row: 1;
   align-self: baseline;
   text-align: right;
+  white-space: nowrap;
+}
+
+.list-tag {
+  grid-column: 3;
+  grid-row: 1;
+  align-self: baseline;
+  min-height: 1.18rem;
+  padding: 0.14rem 0.34rem;
+  border-color: rgba(184, 23, 23, 0.22);
+  background: rgba(184, 23, 23, 0.055);
+  color: var(--accent-color);
+  font-size: 0.56rem;
+  letter-spacing: 0.05em;
   white-space: nowrap;
 }
 
@@ -648,6 +727,7 @@ footer p {
   }
 
   .blog-list .post-date,
+  .list-tag,
   .recommendations-list .item-note {
     grid-column: 2;
     margin-top: 0.16rem;
@@ -656,6 +736,11 @@ footer p {
   }
 
   .blog-list .post-date {
+    grid-row: 3;
+  }
+
+  .list-tag {
     grid-row: 2;
+    justify-self: start;
   }
 }

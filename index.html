@@ -5,7 +5,7 @@
   <title>Nino Risteski - ML Engineer</title>
   <meta name="author" content="Nino Risteski">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" type="text/css" href="stylesheet.css?v=28">
+  <link rel="stylesheet" type="text/css" href="stylesheet.css?v=29">
   <link rel="icon" type="image/x-icon" href="favicon/favicon.ico">
   <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
@@ -37,6 +37,13 @@
         <p>I&rsquo;m a <strong>Founding ML Engineer at AIRecruitPro</strong>, an <strong>open-source contributor</strong>, and a self-taught builder working across AI systems, product engineering, and startups.</p>
         <p>I focus on multimodal models, GPU-accelerated training, ML infrastructure, and turning ideas into products people use. Lately I&rsquo;ve been studying <strong>GPU kernels, memory bandwidth, and matrix multiplication performance</strong>.</p>
       </div>
+      <div class="focus-strip" aria-label="Current focus">
+        <span>Now</span>
+        <strong>GPU kernels</strong>
+        <strong>tinygrad</strong>
+        <strong>ML infra</strong>
+        <strong>multimodal systems</strong>
+      </div>
     </header>
 
     <section id="subscribe" class="newsletter">
@@ -47,36 +54,42 @@
     </section>
 
     <section id="projects">
-      <h2>Projects</h2>
+      <h2>Projects <span class="section-count">6</span></h2>
       <div class="projects-grid">
         <div class="project">
           <span class="item-kicker">Apple GPU / Compute</span>
           <h3><a href="https://github.com/NinoRisteski/METAL_SGEMM_M4">METAL_SGEMM_M4</a></h3>
+          <div class="tag-row"><span>Metal</span><span>SGEMM</span><span>Apple GPU</span></div>
           <p>Metal compute shader experiments for SGEMM (4x4 tiles) that explore Apple GPU optimization and benchmarking.</p>
         </div>
         <div class="project">
           <span class="item-kicker">CUDA / Optimization</span>
           <h3><a href="https://github.com/NinoRisteski/CUDA_SGEMM_BUDGET_GPU">CUDA_SGEMM_BUDGET_GPU</a></h3>
+          <div class="tag-row"><span>CUDA</span><span>SGEMM</span><span>GTX 1660</span></div>
           <p>SGEMM optimization with CUDA on a budget GTX 1660 GPU.</p>
         </div>
         <div class="project">
           <span class="item-kicker">Agent / RAG</span>
           <h3><a href="https://github.com/NinoRisteski/tinypilot">TinyPilot</a></h3>
+          <div class="tag-row"><span>Agent</span><span>RAG</span><span>ChromaDB</span></div>
           <p>AI agent that helps you learn TinyGrad and keeps you updated on bounties, featuring RAG with ChromaDB and GPT integration.</p>
         </div>
         <div class="project">
           <span class="item-kicker">Search / LLM App</span>
           <h3><a href="https://github.com/NinoRisteski/HubermanAnswers">HubermanAnswers</a></h3>
+          <div class="tag-row"><span>LLM</span><span>Search</span><span>Podcast QA</span></div>
           <p>Ask Dr. Andrew Huberman questions and receive answers directly from his podcast episodes.</p>
         </div>
         <div class="project">
           <span class="item-kicker">Desktop Utility</span>
           <h3><a href="https://github.com/NinoRisteski/smart_screenshots">smart_screenshots</a></h3>
+          <div class="tag-row"><span>Utility</span><span>Automation</span><span>Vision</span></div>
           <p>A tool that renames screenshots immediately based on the context in the screenshot.</p>
         </div>
         <div class="project">
           <span class="item-kicker">Open-source Contributions</span>
           <h3>Tinygrad</h3>
+          <div class="tag-row"><span>7 PRs</span><span>Compiler</span><span>Attention</span></div>
           <ul class="project-commits">
             <li><a href="https://github.com/tinygrad/tinygrad/pull/14517"><strong>delete extra cast in decompositions #14517</strong></a> (Feb 2026) — the extra cast is redundant, bitcast(d.dtype) already returns a float.</li>
             <li><a href="https://github.com/tinygrad/tinygrad/pull/13598"><strong>optim empty shard #13513</strong></a> (Dec 2025) — optimized empty shards so the distributed optimizer skips useless work.</li>
@@ -91,46 +104,50 @@
     </section>
 
     <section id="blog">
-      <h2>Writing</h2>
+      <h2>Writing <span class="section-count">4</span></h2>
       <ul class="blog-list">
         <li>
           <a href="https://mlpills.substack.com/p/rw-9-how-vector-dbs-store-100m-embeddings">
             <strong>RW #9 - How Vector DBs Store 100M Embeddings on One Machine (and Still Search Fast)</strong>
           </a>
+          <span class="list-tag">Vector DBs</span>
           <span class="post-date">January 11, 2026 - ML Pills</span>
         </li>
         <li>
           <a href="https://ninoworklog.substack.com/p/you-wont-do-boring-work-in-the-near">
             <strong>You Won't Do Boring Work in The (Near) Future</strong>
           </a>
+          <span class="list-tag">Work</span>
           <span class="post-date">January 3, 2026 - Worklog</span>
         </li>
         <li>
           <a href="blogs/how-i-started-contributing-to-tinygrad.html">
             <strong>How I Started Contributing to tinygrad — My First 4 Merged PRs</strong>
           </a>
+          <span class="list-tag">Open-source</span>
           <span class="post-date">August 11, 2025</span>
         </li>
         <li>
           <a href="blogs/jack-of-all-trades-data-scientist.html">
             <strong>Is "Jack of all trades - a master of none" the best mindset for a Data Scientist?</strong>
           </a>
+          <span class="list-tag">Career</span>
           <span class="post-date">January 26, 2023</span>
         </li>
       </ul>
     </section>
 
     <section id="recommendations">
-      <h2>Useful Stuff</h2>
+      <h2>Useful Stuff <span class="section-count">8</span></h2>
       <ul class="recommendations-list">
-        <li><a href="https://x.com/GabrielPeterss4/status/1898566138352820561"><strong>Job Application Strategy</strong></a><span class="item-note">Gabriel Peters on standing out with personalized demos</span></li>
-        <li><a href="https://masonjwang.com/writing/reading-research"><strong>Reading & Research</strong></a><span class="item-note">Mason Wang on effective reading and research strategies</span></li>
-        <li><a href="https://map.simonsarris.com/p/school-is-not-enough"><strong>School is Not Enough</strong></a><span class="item-note">Simon Sarris on learning through doing and building agency</span></li>
-        <li><a href="https://karpathy.ai/zero-to-hero.html"><strong>Neural Networks: Zero to Hero</strong></a><span class="item-note">Andrej Karpathy's practical deep learning course</span></li>
-        <li><a href="https://x.com/lexfridman/status/1843010390772605183"><strong>Cursor Interview</strong></a><span class="item-note">Lex Fridman's conversation with the founding team of Cursor</span></li>
-        <li><a href="https://huggingface.co/learn"><strong>Hugging Face Courses</strong></a><span class="item-note">Free ML and NLP learning paths</span></li>
-        <li><a href="https://darioamodei.com/machines-of-loving-grace"><strong>Machines of Loving Grace</strong></a><span class="item-note">Dario Amodei on how AI could transform the world for the better</span></li>
-        <li><a href="https://a16z.com/the-techno-optimist-manifesto/"><strong>The Techno-Optimist Manifesto</strong></a><span class="item-note">Marc Andreessen on technology as a lever for progress</span></li>
+        <li><a href="https://x.com/GabrielPeterss4/status/1898566138352820561"><strong>Job Application Strategy</strong></a><span class="list-tag">Career</span><span class="item-note">Gabriel Peters on standing out with personalized demos</span></li>
+        <li><a href="https://masonjwang.com/writing/reading-research"><strong>Reading & Research</strong></a><span class="list-tag">Research</span><span class="item-note">Mason Wang on effective reading and research strategies</span></li>
+        <li><a href="https://map.simonsarris.com/p/school-is-not-enough"><strong>School is Not Enough</strong></a><span class="list-tag">Agency</span><span class="item-note">Simon Sarris on learning through doing and building agency</span></li>
+        <li><a href="https://karpathy.ai/zero-to-hero.html"><strong>Neural Networks: Zero to Hero</strong></a><span class="list-tag">Course</span><span class="item-note">Andrej Karpathy's practical deep learning course</span></li>
+        <li><a href="https://x.com/lexfridman/status/1843010390772605183"><strong>Cursor Interview</strong></a><span class="list-tag">Builders</span><span class="item-note">Lex Fridman's conversation with the founding team of Cursor</span></li>
+        <li><a href="https://huggingface.co/learn"><strong>Hugging Face Courses</strong></a><span class="list-tag">ML</span><span class="item-note">Free ML and NLP learning paths</span></li>
+        <li><a href="https://darioamodei.com/machines-of-loving-grace"><strong>Machines of Loving Grace</strong></a><span class="list-tag">AI</span><span class="item-note">Dario Amodei on how AI could transform the world for the better</span></li>
+        <li><a href="https://a16z.com/the-techno-optimist-manifesto/"><strong>The Techno-Optimist Manifesto</strong></a><span class="list-tag">Essay</span><span class="item-note">Marc Andreessen on technology as a lever for progress</span></li>
       </ul>
     </section>
 
