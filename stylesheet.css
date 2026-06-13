@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&display=swap');
 
 :root {
-  --outer-color: #8f9f98;
+  --outer-color: #2b2a26;
   --background-color: #ded2bd;
   --paper-color: #eadfcc;
   --text-color: #11100e;
@@ -11,9 +11,9 @@
   --strong-border-color: rgba(17, 16, 14, 0.42);
   --accent-color: #b81717;
   --accent-soft: rgba(184, 23, 23, 0.08);
-  --secondary-accent: #2f6f73;
-  --secondary-soft: rgba(47, 111, 115, 0.11);
-  --gold-accent: #9b6b1e;
+  --secondary-accent: #1f4f7a;
+  --secondary-soft: rgba(31, 79, 122, 0.08);
+  --gold-accent: #a36a13;
   --font-heading: 'Merriweather', Georgia, serif;
   --font-body: 'Merriweather', Georgia, serif;
 }
@@ -25,13 +25,21 @@
 }
 
 html {
-  background: var(--outer-color);
+  background:
+    linear-gradient(rgba(255, 248, 238, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 248, 238, 0.025) 1px, transparent 1px),
+    var(--outer-color);
+  background-size: 22px 22px;
 }
 
 body {
   min-height: 100vh;
   color: var(--text-color);
-  background: var(--outer-color);
+  background:
+    linear-gradient(rgba(255, 248, 238, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 248, 238, 0.025) 1px, transparent 1px),
+    var(--outer-color);
+  background-size: 22px 22px;
   font-family: var(--font-body);
   font-size: 12.5px;
   font-weight: 400;
@@ -41,6 +49,7 @@ body {
 }
 
 .container {
+  position: relative;
   width: min(100%, 820px);
   margin: 0 auto;
   padding: 1.15rem 1.15rem 1.4rem;
@@ -50,8 +59,31 @@ body {
     var(--background-color);
   background-size: 64px 64px;
   box-shadow:
-    0 0 0 6px rgba(229, 220, 203, 0.18),
-    10px 12px 0 rgba(17, 16, 14, 0.12);
+    0 0 0 6px rgba(234, 223, 204, 0.16),
+    12px 14px 0 rgba(0, 0, 0, 0.2);
+}
+
+.container::before {
+  content: '';
+  position: absolute;
+  top: 0.55rem;
+  right: 0.55rem;
+  left: 0.55rem;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent-color) 0 18%, transparent 18% 21%, var(--secondary-accent) 21% 41%, transparent 41% 44%, var(--gold-accent) 44% 100%);
+}
+
+.container::after {
+  content: '';
+  position: absolute;
+  right: 0.55rem;
+  bottom: 0.55rem;
+  width: 2.2rem;
+  height: 2.2rem;
+  border-right: 2px solid var(--accent-color);
+  border-bottom: 2px solid var(--accent-color);
+  opacity: 0.8;
+  pointer-events: none;
 }
 
 h1,
@@ -157,7 +189,7 @@ header {
   border: 1px solid var(--strong-border-color);
   border-radius: 3px;
   background: var(--paper-color);
-  box-shadow: 5px 5px 0 rgba(17, 16, 14, 0.12);
+  box-shadow: 5px 5px 0 rgba(184, 23, 23, 0.16);
 }
 
 .profile-image img {
@@ -174,7 +206,7 @@ header {
 
 .role-line {
   margin-bottom: 0.45rem;
-  color: var(--secondary-accent);
+  color: var(--accent-color);
   font-size: 0.74rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -191,7 +223,7 @@ header {
   align-items: center;
   min-height: 1.65rem;
   padding: 0.24rem 0.5rem;
-  border: 1px solid rgba(47, 111, 115, 0.34);
+  border: 1px solid var(--border-color);
   background: rgba(229, 220, 203, 0.46);
   font-size: 0.68rem;
   letter-spacing: 0.07em;
@@ -199,8 +231,8 @@ header {
 }
 
 .social-links a:hover {
-  border-color: var(--secondary-accent);
-  background: var(--secondary-soft);
+  border-color: var(--accent-color);
+  background: var(--accent-soft);
 }
 
 .social-links a::before {
@@ -230,9 +262,11 @@ header {
   margin: 0.85rem 0 0.95rem;
   padding: 0.65rem 0.75rem;
   border: 1px solid var(--border-color);
-  border-color: rgba(47, 111, 115, 0.32);
+  border-color: rgba(31, 79, 122, 0.28);
   border-left: 3px solid var(--secondary-accent);
-  background: var(--secondary-soft);
+  background:
+    linear-gradient(90deg, var(--secondary-soft), transparent 72%),
+    rgba(234, 223, 204, 0.38);
 }
 
 .newsletter-intro {
@@ -265,8 +299,8 @@ header {
 }
 
 .newsletter-cta:hover {
-  background: var(--secondary-accent);
-  border-color: var(--secondary-accent);
+  background: var(--accent-color);
+  border-color: var(--accent-color);
   color: #fff8ee;
 }
 
@@ -274,6 +308,7 @@ section {
   position: relative;
   padding: 0.95rem 0 0.85rem;
   border-top: 1px solid var(--strong-border-color);
+  counter-increment: section;
 }
 
 section > h2 {
@@ -284,11 +319,15 @@ section > h2 {
 }
 
 section > h2::before {
-  content: '';
-  width: 0.45rem;
-  height: 0.45rem;
-  border: 1px solid var(--gold-accent);
-  background: rgba(155, 107, 30, 0.14);
+  content: '0' counter(section);
+  width: auto;
+  height: auto;
+  padding: 0.12rem 0.28rem;
+  border: 1px solid rgba(31, 79, 122, 0.36);
+  background: var(--secondary-soft);
+  color: var(--secondary-accent);
+  font-size: 0.62rem;
+  letter-spacing: 0.04em;
 }
 
 section > h2::after {
@@ -320,7 +359,7 @@ section > h2::after {
 }
 
 .project:hover::before {
-  background: var(--secondary-accent);
+  background: var(--accent-color);
 }
 
 .project p {
@@ -376,19 +415,31 @@ section > h2::after {
 .blog-list li,
 .recommendations-list li {
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: 0.65rem 1fr auto;
   gap: 0.12rem 1rem;
   padding: 0.52rem 0;
   border-bottom: 1px solid var(--border-color);
 }
 
+.blog-list li::before,
+.recommendations-list li::before {
+  content: '';
+  width: 0.38rem;
+  height: 0.38rem;
+  margin-top: 0.38rem;
+  background: var(--gold-accent);
+  grid-column: 1;
+  grid-row: 1;
+}
+
 .blog-list a,
 .recommendations-list a {
+  grid-column: 2;
   font-weight: 700;
 }
 
 .blog-list .post-date {
-  grid-column: 2;
+  grid-column: 3;
   grid-row: 1;
   align-self: baseline;
   text-align: right;
@@ -396,7 +447,7 @@ section > h2::after {
 }
 
 .recommendations-list .item-note {
-  grid-column: 1 / -1;
+  grid-column: 2 / -1;
   margin-top: 0.06rem;
   color: rgba(17, 16, 14, 0.68);
   font-size: 0.75rem;
@@ -592,13 +643,19 @@ footer p {
 
   .blog-list li,
   .recommendations-list li {
-    display: block;
+    grid-template-columns: 0.55rem 1fr;
+    gap: 0.08rem 0.7rem;
   }
 
   .blog-list .post-date,
   .recommendations-list .item-note {
+    grid-column: 2;
     margin-top: 0.16rem;
     text-align: left;
     white-space: normal;
+  }
+
+  .blog-list .post-date {
+    grid-row: 2;
   }
 }
