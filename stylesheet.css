@@ -49,16 +49,6 @@ body {
   background: var(--background-color);
 }
 
-.container::before {
-  content: '';
-  position: absolute;
-  top: 0.55rem;
-  right: 0.55rem;
-  left: 0.55rem;
-  height: 3px;
-  background: linear-gradient(90deg, var(--accent-color) 0 18%, transparent 18% 21%, var(--secondary-accent) 21% 41%, transparent 41% 44%, var(--gold-accent) 44% 100%);
-}
-
 h1,
 h2,
 h3,
@@ -159,9 +149,6 @@ header {
   width: 108px;
   height: 108px;
   overflow: hidden;
-  border: 1px solid var(--strong-border-color);
-  border-radius: 3px;
-  background: var(--paper-color);
 }
 
 .profile-image img {
@@ -194,17 +181,14 @@ header {
   display: inline-flex;
   align-items: center;
   min-height: 1.65rem;
-  padding: 0.24rem 0.5rem;
-  border: 1px solid var(--border-color);
-  background: rgba(229, 220, 203, 0.46);
+  padding: 0;
   font-size: 0.68rem;
   letter-spacing: 0.07em;
   text-transform: uppercase;
 }
 
 .social-links a:hover {
-  border-color: var(--accent-color);
-  background: var(--accent-soft);
+  color: var(--accent-color);
 }
 
 .social-links a::before {
@@ -214,9 +198,8 @@ header {
 .intro {
   position: relative;
   width: min(100%, 670px);
-  padding: 0.85rem 1rem 0.8rem;
-  border: 1px solid var(--border-color);
-  background: #ffffff;
+  padding: 0.65rem 0 0;
+  border-top: 1px solid var(--border-color);
   color: rgba(17, 16, 14, 0.85);
   font-size: 0.86rem;
   line-height: 1.55;
@@ -269,13 +252,9 @@ header {
   justify-content: space-between;
   gap: 0.9rem;
   margin: 0.85rem 0 0.95rem;
-  padding: 0.65rem 0.75rem;
-  border: 1px solid var(--border-color);
-  border-color: rgba(31, 79, 122, 0.28);
-  border-left: 3px solid var(--secondary-accent);
-  background:
-    linear-gradient(90deg, var(--secondary-soft), transparent 72%),
-    rgba(234, 223, 204, 0.38);
+  padding: 0.65rem 0;
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
 }
 
 .newsletter-intro {
@@ -289,10 +268,8 @@ header {
   align-items: center;
   justify-content: center;
   min-height: 1.85rem;
-  padding: 0.3rem 0.72rem;
-  border: 1px solid var(--text-color);
-  background: var(--text-color);
-  color: var(--background-color);
+  padding: 0;
+  color: var(--accent-color);
   font-size: 0.68rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -304,13 +281,11 @@ header {
 }
 
 .newsletter-cta::after {
-  color: var(--background-color);
+  color: var(--accent-color);
 }
 
 .newsletter-cta:hover {
-  background: var(--accent-color);
-  border-color: var(--accent-color);
-  color: #fff8ee;
+  color: var(--text-color);
 }
 
 section {
@@ -518,10 +493,8 @@ footer p {
 }
 
 .blog-post-content code {
-  padding: 0.1rem 0.32rem;
-  border-radius: 2px;
-  background: rgba(17, 16, 14, 0.82);
-  color: #fff8ee;
+  padding: 0;
+  color: var(--accent-color);
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   font-size: 0.9em;
 }
@@ -529,11 +502,10 @@ footer p {
 .blog-post-content pre,
 .blog-post-content .codehilite {
   margin: 0.9rem 0 1rem;
-  padding: 0.75rem;
+  padding: 0.65rem 0;
   overflow-x: auto;
-  border-left: 3px solid var(--accent-color);
-  border-radius: 2px;
-  background: rgba(17, 16, 14, 0.86);
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
 }
 
 .blog-post-content pre code {
@@ -558,7 +530,6 @@ footer p {
   max-width: 100%;
   height: auto;
   border: 1px solid var(--border-color);
-  border-radius: 3px;
 }
 
 @media (min-width: 768px) {
