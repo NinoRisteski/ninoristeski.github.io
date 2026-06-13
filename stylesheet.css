@@ -1,9 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&display=swap');
 
 :root {
-  --outer-color: #b9ad98;
-  --background-color: #dcd1be;
-  --paper-color: #e5dccb;
+  --outer-color: #8f9f98;
+  --background-color: #ded2bd;
+  --paper-color: #eadfcc;
   --text-color: #11100e;
   --muted-color: rgba(17, 16, 14, 0.62);
   --faint-color: rgba(17, 16, 14, 0.08);
@@ -11,6 +11,9 @@
   --strong-border-color: rgba(17, 16, 14, 0.42);
   --accent-color: #b81717;
   --accent-soft: rgba(184, 23, 23, 0.08);
+  --secondary-accent: #2f6f73;
+  --secondary-soft: rgba(47, 111, 115, 0.11);
+  --gold-accent: #9b6b1e;
   --font-heading: 'Merriweather', Georgia, serif;
   --font-body: 'Merriweather', Georgia, serif;
 }
@@ -171,7 +174,7 @@ header {
 
 .role-line {
   margin-bottom: 0.45rem;
-  color: var(--muted-color);
+  color: var(--secondary-accent);
   font-size: 0.74rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -188,11 +191,16 @@ header {
   align-items: center;
   min-height: 1.65rem;
   padding: 0.24rem 0.5rem;
-  border: 1px solid var(--border-color);
+  border: 1px solid rgba(47, 111, 115, 0.34);
   background: rgba(229, 220, 203, 0.46);
   font-size: 0.68rem;
   letter-spacing: 0.07em;
   text-transform: uppercase;
+}
+
+.social-links a:hover {
+  border-color: var(--secondary-accent);
+  background: var(--secondary-soft);
 }
 
 .social-links a::before {
@@ -204,6 +212,7 @@ header {
   padding: 0.7rem 0.9rem 0.15rem;
   border-top: 1px solid var(--strong-border-color);
   border-bottom: 1px solid var(--border-color);
+  background: rgba(234, 223, 204, 0.34);
   color: rgba(17, 16, 14, 0.85);
   font-size: 0.84rem;
   line-height: 1.55;
@@ -221,8 +230,9 @@ header {
   margin: 0.85rem 0 0.95rem;
   padding: 0.65rem 0.75rem;
   border: 1px solid var(--border-color);
-  border-left: 3px solid var(--accent-color);
-  background: var(--accent-soft);
+  border-color: rgba(47, 111, 115, 0.32);
+  border-left: 3px solid var(--secondary-accent);
+  background: var(--secondary-soft);
 }
 
 .newsletter-intro {
@@ -255,8 +265,8 @@ header {
 }
 
 .newsletter-cta:hover {
-  background: var(--accent-color);
-  border-color: var(--accent-color);
+  background: var(--secondary-accent);
+  border-color: var(--secondary-accent);
   color: #fff8ee;
 }
 
@@ -277,8 +287,8 @@ section > h2::before {
   content: '';
   width: 0.45rem;
   height: 0.45rem;
-  border: 1px solid var(--accent-color);
-  background: var(--accent-soft);
+  border: 1px solid var(--gold-accent);
+  background: rgba(155, 107, 30, 0.14);
 }
 
 section > h2::after {
@@ -310,7 +320,7 @@ section > h2::after {
 }
 
 .project:hover::before {
-  background: var(--accent-color);
+  background: var(--secondary-accent);
 }
 
 .project p {
@@ -355,7 +365,7 @@ section > h2::after {
   left: 0;
   width: 0.28rem;
   height: 0.28rem;
-  background: var(--accent-color);
+  background: var(--gold-accent);
 }
 
 .blog-list,
