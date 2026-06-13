@@ -81,7 +81,7 @@ def build_blog_post(source_path, output_path):
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Nino Risteski">
-    <link rel="stylesheet" type="text/css" href="../stylesheet.css?v=24">
+    <link rel="stylesheet" type="text/css" href="../stylesheet.css?v=25">
     <link rel="icon" type="image/x-icon" href="../favicon/favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="../favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="../favicon/favicon-32x32.png">
@@ -133,4 +133,4 @@ def build_all_blog_posts():
     print("All blog posts generated successfully.")
 
 if __name__ == "__main__":
-    build_all_blog_posts() 
+    build_all_blog_posts()
