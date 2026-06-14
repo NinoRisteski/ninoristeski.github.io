@@ -198,12 +198,6 @@ header {
   text-align: left;
 }
 
-.intro-lead {
-  color: var(--text-color);
-  font-size: 0.94rem;
-  line-height: 1.5;
-}
-
 .intro p {
   margin-bottom: 0.5rem;
 }
@@ -222,8 +216,8 @@ header {
   display: block;
   margin-bottom: 0.18rem;
   color: var(--accent-color);
-  font-size: 0.62rem;
-  font-weight: 700;
+  font-size: inherit;
+  font-weight: 400;
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
