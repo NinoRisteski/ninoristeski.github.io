@@ -226,10 +226,11 @@ header {
 .newsletter {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 0.9rem;
-  margin: 0.85rem 0 0.95rem;
-  padding: 0.65rem 0;
+  justify-content: center;
+  gap: 0.45rem;
+  max-width: 670px;
+  margin: 0.75rem auto 0.95rem;
+  padding: 0.5rem 0;
   border-top: 1px solid var(--border-color);
   border-bottom: 1px solid var(--border-color);
 }
@@ -620,13 +621,10 @@ footer p {
   }
 
   .newsletter {
-    align-items: stretch;
-    flex-direction: column;
-    gap: 0.55rem;
-  }
-
-  .newsletter-cta {
-    width: 100%;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    text-align: center;
   }
 
   .blog-list li,
