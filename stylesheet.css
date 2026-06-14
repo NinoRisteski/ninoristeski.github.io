@@ -163,14 +163,6 @@ header {
   text-align: left;
 }
 
-.role-line {
-  margin-bottom: 0.45rem;
-  color: var(--accent-color);
-  font-size: 0.74rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
 .social-links {
   display: flex;
   flex-wrap: wrap;
