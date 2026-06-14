@@ -386,6 +386,26 @@ section > h2::after {
   letter-spacing: 0;
 }
 
+#recommendations {
+  padding-bottom: 0.55rem;
+}
+
+.recommendations-list li {
+  display: block;
+  padding: 0.26rem 0;
+}
+
+.recommendations-list .item-note {
+  display: inline;
+  margin-top: 0;
+  margin-left: 0.25rem;
+  font-size: 0.7rem;
+}
+
+.recommendations-list .item-note::before {
+  content: '- ';
+}
+
 footer {
   margin-top: 0.8rem;
   padding-top: 0.8rem;
