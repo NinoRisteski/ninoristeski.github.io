@@ -296,6 +296,19 @@ section > h2::after {
   color: var(--section-color);
 }
 
+#talks {
+  border-top-color: rgba(159, 45, 32, 0.58);
+}
+
+#talks > h2,
+#talks .item-kicker {
+  color: var(--section-color);
+}
+
+#talks > h2::after {
+  background: rgba(159, 45, 32, 0.38);
+}
+
 #projects > h2::after {
   background: rgba(159, 45, 32, 0.38);
 }
@@ -375,6 +388,42 @@ section > h2::after {
   margin-top: 0.38rem;
   padding-left: 0;
   list-style: none;
+}
+
+.talk-item {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  justify-content: space-between;
+}
+
+.talk-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.talk-image {
+  flex-shrink: 0;
+  display: block;
+  width: 220px;
+}
+
+.talk-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+
+@media (max-width: 640px) {
+  .talk-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .talk-image {
+    width: 100%;
+  }
 }
 
 .project-commits li {
