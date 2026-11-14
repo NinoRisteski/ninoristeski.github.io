@@ -467,7 +467,7 @@ footer p {
 }
 
 .blog-post-container header {
-  align-items: flex-start;
+  align-items: center;
   margin-bottom: 1rem;
   padding-bottom: 0.8rem;
   border-bottom: 1px solid var(--strong-border-color);
@@ -500,6 +500,7 @@ footer p {
 
 .blog-post-content {
   max-width: 680px;
+  margin: 0 auto;
   font-size: 16px;
   line-height: 1.65;
 }
