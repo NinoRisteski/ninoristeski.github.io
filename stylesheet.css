@@ -27,6 +27,7 @@
 
 html {
   background: var(--outer-color);
+  font-size: 18px;
 }
 
 body {
@@ -34,7 +35,7 @@ body {
   color: var(--text-color);
   background: var(--outer-color);
   font-family: var(--font-body);
-  font-size: 12.5px;
+  font-size: 14px;
   font-weight: 400;
   line-height: 1.5;
   letter-spacing: 0;
@@ -147,8 +148,8 @@ header {
 }
 
 .profile-image {
-  width: 108px;
-  height: 108px;
+  width: 124px;
+  height: 124px;
   overflow: hidden;
 }
 
@@ -620,7 +621,7 @@ footer p {
 
 @media (min-width: 768px) {
   body {
-    font-size: 13px;
+    font-size: 14.5px;
   }
 
   h1 {
