@@ -232,8 +232,6 @@ header {
   max-width: 670px;
   margin: 0.75rem auto 0.95rem;
   padding: 0.5rem 0;
-  border-top: 1px solid var(--border-color);
-  border-bottom: 1px solid var(--border-color);
 }
 
 .newsletter-intro {
@@ -275,17 +273,7 @@ section {
 }
 
 section > h2 {
-  display: flex;
-  align-items: center;
-  gap: 0.45rem;
   margin-bottom: 0.65rem;
-}
-
-section > h2::after {
-  content: '';
-  flex: 1;
-  height: 1px;
-  background: var(--border-color);
 }
 
 #projects {
@@ -306,14 +294,6 @@ section > h2::after {
   color: var(--section-color);
 }
 
-#talks > h2::after {
-  background: rgba(159, 45, 32, 0.38);
-}
-
-#projects > h2::after {
-  background: rgba(159, 45, 32, 0.38);
-}
-
 #blog {
   border-top-color: rgba(159, 45, 32, 0.58);
 }
@@ -321,10 +301,6 @@ section > h2::after {
 #blog > h2,
 #blog .post-date {
   color: var(--section-color);
-}
-
-#blog > h2::after {
-  background: rgba(159, 45, 32, 0.38);
 }
 
 #recommendations {
@@ -336,19 +312,14 @@ section > h2::after {
   color: var(--section-color);
 }
 
-#recommendations > h2::after {
-  background: rgba(159, 45, 32, 0.38);
-}
-
 .projects-grid {
   display: grid;
-  gap: 0;
+  gap: 0.3rem;
 }
 
 .project {
   position: relative;
   padding: 0.62rem 0 0.66rem 0.8rem;
-  border-bottom: 1px solid var(--border-color);
 }
 
 .project::before {
@@ -445,8 +416,7 @@ section > h2::after {
   display: grid;
   grid-template-columns: 1fr auto;
   gap: 0.12rem 1rem;
-  padding: 0.52rem 0;
-  border-bottom: 1px solid var(--border-color);
+  padding: 0.3rem 0;
 }
 
 .blog-list a,
