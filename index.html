@@ -105,6 +105,7 @@
           <span class="item-kicker">Open-source Contributions</span>
           <h3>Tinygrad</h3>
           <ul class="project-commits">
+            <li><a href="https://github.com/tinygrad/tinygrad/pull/19325"><strong>fix same padding stride #19325</strong></a> (Nov 2026) — padding='same' rejected stride=(1, 1) even though it means the same as stride=1; now each stride value is checked so both forms work while still rejecting strides larger than 1.</li>
             <li><a href="https://github.com/tinygrad/tinygrad/pull/14517"><strong>delete extra cast in decompositions #14517</strong></a> (Feb 2026) — the extra cast is redundant, bitcast(d.dtype) already returns a float.</li>
             <li><a href="https://github.com/tinygrad/tinygrad/pull/13598"><strong>optim empty shard #13513</strong></a> (Dec 2025) — optimized empty shards so the distributed optimizer skips useless work.</li>
             <li><a href="https://github.com/tinygrad/tinygrad/pull/11678"><strong>rope cache optim for jit prune in llm.py</strong></a> (Aug 2025) — cached ROPE calculations so the JIT prune path reuses angles instead of recomputing them.</li>
