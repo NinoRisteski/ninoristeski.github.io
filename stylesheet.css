@@ -162,12 +162,13 @@ header {
 
 .name-title {
   max-width: 430px;
-  text-align: left;
+  text-align: center;
 }
 
 .social-links {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 0.35rem;
 }
 
