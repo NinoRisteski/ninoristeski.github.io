@@ -5,7 +5,7 @@
   <title>Nino Risteski - ML Engineer</title>
   <meta name="author" content="Nino Risteski">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" type="text/css" href="stylesheet.css?v=53">
+  <link rel="stylesheet" type="text/css" href="stylesheet.css?v=54">
   <link rel="icon" type="image/x-icon" href="favicon/favicon.ico">
   <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
@@ -75,6 +75,20 @@
       <h2>Projects</h2>
       <div class="projects-grid">
         <div class="project">
+          <span class="item-kicker">Open-source Contributions</span>
+          <h3>Tinygrad</h3>
+          <ul class="project-commits">
+            <li><a href="https://github.com/tinygrad/tinygrad/pull/19325"><strong>fix same padding stride #19325</strong></a> (Nov 2026) — fixed stride=(1, 1) handling.</li>
+            <li><a href="https://github.com/tinygrad/tinygrad/pull/14517"><strong>delete extra cast in decompositions #14517</strong></a> (Feb 2026) — removed a redundant cast.</li>
+            <li><a href="https://github.com/tinygrad/tinygrad/pull/13598"><strong>optim empty shard #13513</strong></a> (Dec 2025) — optimized empty shard handling.</li>
+            <li><a href="https://github.com/tinygrad/tinygrad/pull/11678"><strong>rope cache optim for jit prune in llm.py</strong></a> (Aug 2025) — cached ROPE angle calculations.</li>
+            <li><a href="https://github.com/tinygrad/tinygrad/pull/11097"><strong>adding enable_gqa in SDPA</strong></a> (Jul 2025) — added grouped query attention support.</li>
+            <li><a href="https://github.com/tinygrad/tinygrad/pull/11024"><strong>clean up unused imports in examples and update CI linting</strong></a> (Jun 2025) — cleaned imports, added CI linting.</li>
+            <li><a href="https://github.com/tinygrad/tinygrad/pull/10880"><strong>fix test logcumsumexp broken devectorize=0</strong></a> (Jun 2025) — fixed NaN bug in logcumsumexp.</li>
+            <li><a href="https://github.com/tinygrad/tinygrad/pull/10877"><strong>small fix replacing download_file with fetch</strong></a> (Jun 2025) — swapped in the canonical fetch helper.</li>
+          </ul>
+        </div>
+        <div class="project">
           <span class="item-kicker">Apple GPU / Compute</span>
           <h3><a href="https://github.com/NinoRisteski/METAL_SGEMM_M4">METAL_SGEMM_M4</a></h3>
           <p>Metal compute shader experiments for SGEMM (4x4 tiles) that explore Apple GPU optimization and benchmarking.</p>
@@ -98,20 +112,6 @@
           <span class="item-kicker">Desktop Utility</span>
           <h3><a href="https://github.com/NinoRisteski/smart_screenshots">smart_screenshots</a></h3>
           <p>A tool that renames screenshots immediately based on the context in the screenshot.</p>
-        </div>
-        <div class="project">
-          <span class="item-kicker">Open-source Contributions</span>
-          <h3>Tinygrad</h3>
-          <ul class="project-commits">
-            <li><a href="https://github.com/tinygrad/tinygrad/pull/19325"><strong>fix same padding stride #19325</strong></a> (Nov 2026) — fixed stride=(1, 1) handling.</li>
-            <li><a href="https://github.com/tinygrad/tinygrad/pull/14517"><strong>delete extra cast in decompositions #14517</strong></a> (Feb 2026) — removed a redundant cast.</li>
-            <li><a href="https://github.com/tinygrad/tinygrad/pull/13598"><strong>optim empty shard #13513</strong></a> (Dec 2025) — optimized empty shard handling.</li>
-            <li><a href="https://github.com/tinygrad/tinygrad/pull/11678"><strong>rope cache optim for jit prune in llm.py</strong></a> (Aug 2025) — cached ROPE angle calculations.</li>
-            <li><a href="https://github.com/tinygrad/tinygrad/pull/11097"><strong>adding enable_gqa in SDPA</strong></a> (Jul 2025) — added grouped query attention support.</li>
-            <li><a href="https://github.com/tinygrad/tinygrad/pull/11024"><strong>clean up unused imports in examples and update CI linting</strong></a> (Jun 2025) — cleaned imports, added CI linting.</li>
-            <li><a href="https://github.com/tinygrad/tinygrad/pull/10880"><strong>fix test logcumsumexp broken devectorize=0</strong></a> (Jun 2025) — fixed NaN bug in logcumsumexp.</li>
-            <li><a href="https://github.com/tinygrad/tinygrad/pull/10877"><strong>small fix replacing download_file with fetch</strong></a> (Jun 2025) — swapped in the canonical fetch helper.</li>
-          </ul>
         </div>
       </div>
     </section>

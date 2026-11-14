@@ -274,6 +274,13 @@ section > h2 {
   margin-bottom: 0.65rem;
 }
 
+#talks > h2,
+#projects > h2,
+#blog > h2,
+#recommendations > h2 {
+  text-align: center;
+}
+
 #projects,
 #talks,
 #blog,
