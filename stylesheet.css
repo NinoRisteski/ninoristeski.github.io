@@ -269,7 +269,7 @@ header {
 
 section {
   position: relative;
-  padding: 0.95rem 0 0.85rem;
+  padding: 1.8rem 0 1.6rem;
   border-top: 1px solid var(--strong-border-color);
   counter-increment: section;
 }
