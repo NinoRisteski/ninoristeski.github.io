@@ -193,7 +193,6 @@ header {
   position: relative;
   width: min(100%, 670px);
   padding: 0.65rem 0 0;
-  border-top: 1px solid var(--border-color);
   color: rgba(17, 16, 14, 0.85);
   font-size: 0.86rem;
   line-height: 1.55;
@@ -269,44 +268,25 @@ section {
   position: relative;
   padding: 1.8rem 0 1.6rem;
   border-top: 1px solid var(--strong-border-color);
-  counter-increment: section;
 }
 
 section > h2 {
   margin-bottom: 0.65rem;
 }
 
-#projects {
-  border-top-color: rgba(159, 45, 32, 0.58);
-}
-
-#projects > h2,
-#projects .item-kicker {
-  color: var(--section-color);
-}
-
-#talks {
-  border-top-color: rgba(159, 45, 32, 0.58);
-}
-
-#talks > h2,
-#talks .item-kicker {
-  color: var(--section-color);
-}
-
-#blog {
-  border-top-color: rgba(159, 45, 32, 0.58);
-}
-
-#blog > h2,
-#blog .post-date {
-  color: var(--section-color);
-}
-
+#projects,
+#talks,
+#blog,
 #recommendations {
   border-top-color: rgba(159, 45, 32, 0.58);
 }
 
+#projects > h2,
+#projects .item-kicker,
+#talks > h2,
+#talks .item-kicker,
+#blog > h2,
+#blog .post-date,
 #recommendations > h2,
 #recommendations .item-note {
   color: var(--section-color);
