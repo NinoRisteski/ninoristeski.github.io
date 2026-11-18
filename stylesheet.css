@@ -401,52 +401,30 @@ section > h2 {
 
 .blog-list li,
 .recommendations-list li {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 0.12rem 1rem;
-  padding: 0.3rem 0;
-}
-
-.blog-list a,
-.recommendations-list a {
-  grid-column: 1;
-  font-weight: 700;
-}
-
-.blog-list .post-date {
-  grid-column: 2;
-  grid-row: 1;
-  align-self: baseline;
-  text-align: right;
-  white-space: nowrap;
-}
-
-.recommendations-list .item-note {
-  grid-column: 1 / -1;
-  margin-top: 0.06rem;
-  color: rgba(17, 16, 14, 0.68);
-  font-size: 0.75rem;
-  letter-spacing: 0;
-}
-
-#recommendations {
-  padding-bottom: 0.55rem;
-}
-
-.recommendations-list li {
   display: block;
   padding: 0.26rem 0;
 }
 
-.recommendations-list .item-note {
-  display: inline;
-  margin-top: 0;
-  margin-left: 0.25rem;
-  font-size: 0.7rem;
+.blog-list a,
+.recommendations-list a {
+  font-weight: 700;
 }
 
+.blog-list .post-date,
+.recommendations-list .item-note {
+  display: inline;
+  margin-left: 0.25rem;
+  font-size: 0.7rem;
+  letter-spacing: 0;
+}
+
+.blog-list .post-date::before,
 .recommendations-list .item-note::before {
   content: '- ';
+}
+
+#recommendations {
+  padding-bottom: 0.55rem;
 }
 
 footer {
@@ -635,22 +613,5 @@ footer p {
     gap: 0.35rem;
     text-align: center;
   }
-
-  .blog-list li,
-  .recommendations-list li {
-    grid-template-columns: 1fr;
-    gap: 0.08rem 0.7rem;
-  }
-
-  .blog-list .post-date,
-  .recommendations-list .item-note {
-    grid-column: 1;
-    margin-top: 0.16rem;
-    text-align: left;
-    white-space: normal;
-  }
-
-  .blog-list .post-date {
-    grid-row: 2;
-  }
+}
 }
