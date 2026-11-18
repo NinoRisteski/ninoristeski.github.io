@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
 
 :root {
   --outer-color: #2b2a26;
@@ -15,8 +15,8 @@
   --secondary-soft: rgba(31, 79, 122, 0.08);
   --gold-accent: #a36a13;
   --section-color: #9f2d20;
-  --font-heading: 'Merriweather', Georgia, serif;
-  --font-body: 'Merriweather', Georgia, serif;
+  --font-heading: 'Roboto', Arial, sans-serif;
+  --font-body: 'Roboto', Arial, sans-serif;
 }
 
 * {
