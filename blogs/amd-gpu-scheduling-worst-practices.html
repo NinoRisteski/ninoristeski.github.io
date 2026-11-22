@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Nino Risteski">
+    <link rel="stylesheet" type="text/css" href="../stylesheet.css?v=63">
+    <link rel="icon" type="image/x-icon" href="../favicon/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="../favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon/favicon-16x16.png">
+    <title>Notes on AMD GPU Scheduling and Its “Worst Practices”</title>
+    <style>
+        .notes { --a:#1f4f7a; --b:#9f2d20; --w:#a36a13; --g:#cfcdc6; --line:rgba(17,16,14,0.22); --soft:rgba(17,16,14,0.05); --mut:rgba(17,16,14,0.62); }
+        .notes * { border-radius: 0; }
+        .notes .lede { color: var(--mut); }
+        .notes .num { display:block; margin-bottom:0.15rem; color:var(--b); font-size:0.62rem; font-weight:700; letter-spacing:0.12em; }
+        .notes h2 { margin-top:2rem; }
+        .notes .cap { margin:0.6rem 0 0; color:var(--mut); font-size:0.7rem; line-height:1.45; }
+        .notes .row { display:flex; flex-wrap:wrap; gap:0.4rem; align-items:center; margin:0 0 0.7rem; }
+        .notes button { font:inherit; font-size:0.7rem; color:var(--text-color); background:#fff; border:1px solid var(--line); padding:0.28rem 0.65rem; cursor:pointer; }
+        .notes button:hover { border-color:var(--text-color); }
+        .notes button.on { border-color:var(--b); color:var(--b); background:var(--soft); }
+        .notes input[type=range] { flex:1; min-width:130px; accent-color:var(--b); }
+        .notes .lbl { font-size:0.7rem; color:var(--mut); }
+        .notes .lg { display:flex; flex-wrap:wrap; gap:0.8rem; margin:0 0 0.6rem; font-size:0.68rem; color:var(--mut); }
+        .notes .lg i { display:inline-block; width:10px; height:10px; margin-right:5px; vertical-align:-1px; }
+        .notes .stats { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:0.5rem; margin-top:0.7rem; }
+        .notes .stat { border:1px solid var(--line); padding:0.4rem 0.6rem; }
+        .notes .stat b { display:block; font-size:1.05rem; font-weight:700; }
+        .notes .stat span { font-size:0.65rem; color:var(--mut); letter-spacing:0.04em; text-transform:uppercase; }
+        .notes .cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:0.5rem; margin-top:0.7rem; }
+        .notes .c { border:1px solid var(--line); padding:0.5rem 0.65rem; font-size:0.78rem; line-height:1.45; }
+        .notes .c b { display:block; margin-bottom:0.12rem; }
+        .notes .ses { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:0.4rem; }
+        .notes .se { text-align:center; font-size:0.62rem; color:var(--mut); border:1px solid var(--line); padding:0.35rem 0.1rem; }
+        .notes .se.ptr { border-color:var(--text-color); box-shadow:0 0 0 1px var(--text-color); }
+        .notes .cus { display:grid; grid-template-columns:repeat(5,10px); gap:2px; justify-content:center; margin-top:4px; }
+        .notes .cu { display:block; width:10px; height:10px; background:var(--g); }
+        .notes .lone { outline:2px solid var(--w); outline-offset:1px; }
+        .notes .bars .br { display:grid; grid-template-columns:92px 1fr 104px; gap:0.5rem; align-items:center; font-size:0.7rem; margin:0 0 0.35rem; white-space:nowrap; }
+        .notes .track { position:relative; height:13px; background:var(--soft); }
+        .notes .track .mx, .notes .track .mn { position:absolute; left:0; top:0; height:100%; background:var(--w); }
+        .notes .track .mx { opacity:0.35; }
+        .notes .mono { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; }
+        .notes .chip { display:inline-block; font:0.68rem ui-monospace,SFMono-Regular,Menlo,monospace; padding:1px 6px; margin:2px; color:#fff; }
+        .notes .q { border:1px solid var(--line); padding:0.35rem 0.5rem; min-height:2.4rem; font-size:0.68rem; color:var(--mut); }
+        .notes .qgrid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:0.4rem; }
+        .notes .slots { display:grid; grid-template-columns:38px repeat(8,minmax(0,1fr)); gap:3px; align-items:center; font-size:0.62rem; color:var(--mut); }
+        .notes .slot { height:16px; border:1px dashed var(--line); }
+        .notes .slot.f { background:var(--a); border:1px solid var(--a); }
+        .notes .cuRow { display:grid; grid-template-columns:repeat(8,minmax(0,1fr)); gap:3px; }
+        .notes .cuRow div { height:28px; }
+        .notes svg text { fill:var(--text-color); font-size:12px; }
+        .notes .bits { display:grid; grid-template-columns:repeat(16,minmax(0,1fr)); gap:2px; margin:0 0 0.4rem; }
+        .notes .bits div { height:20px; font:0.55rem ui-monospace,SFMono-Regular,Menlo,monospace; color:#fff; display:flex; align-items:center; justify-content:center; }
+        .notes .tk { margin:0.3rem 0 0 1.1rem; padding:0; font-size:0.85rem; }
+        .notes .tk li { margin-bottom:0.3rem; }
+    </style>
+</head>
+<body>
+    <div class="container blog-post-container">
+        <header>
+            <a href="../index.html" class="back-link">← Back to Home</a>
+            <h1>Notes on AMD GPU Scheduling and Its “Worst Practices”</h1>
+            <div class="post-meta">
+                <span class="post-date">2026-11-22</span>
+            </div>
+        </header>
+
+        <main class="blog-post-content notes">
+            <p class="lede">My notes on Otterness &amp; Anderson’s paper (UNC Chapel Hill, Real-Time Systems 2022 / RTNS 2021). Everything was measured on a Radeon VII with ROCm 4.2. One idea per note, plus a little toy you can poke at.</p>
+
+            <h2><span class="num">1 · INTRO</span>Open stack, no docs</h2>
+            <p>ROCm is open source, but it’s huge and almost nothing about how it schedules work is written down. So the authors followed a kernel launch through every layer and mapped what happens. Here’s the stack, top to bottom.</p>
+            <svg viewBox="0 0 640 150" width="100%" role="img" aria-label="ROCm layers from HIP down to GPU firmware">
+                <rect x="10" y="10" width="300" height="24" fill="#1f4f7a" fill-opacity=".14" stroke="#1f4f7a"/><text x="20" y="27">HIP API (your code)</text>
+                <rect x="10" y="38" width="300" height="24" fill="#1f4f7a" fill-opacity=".14" stroke="#1f4f7a"/><text x="20" y="55">ROCclr (runtime)</text>
+                <rect x="10" y="66" width="300" height="24" fill="#1f4f7a" fill-opacity=".14" stroke="#1f4f7a"/><text x="20" y="83">HSA runtime (ROCr)</text>
+                <rect x="10" y="94" width="300" height="24" fill="#9f2d20" fill-opacity=".14" stroke="#9f2d20"/><text x="20" y="111">amdgpu / KFD driver</text>
+                <rect x="10" y="122" width="300" height="24" fill="#9f2d20" fill-opacity=".14" stroke="#9f2d20"/><text x="20" y="139">GPU firmware + hardware (ACEs, SEs, CUs)</text>
+                <path d="M330 22 L330 134" stroke="#a36a13" stroke-width="2" stroke-dasharray="4 4"/>
+                <text x="342" y="60">Scheduling rules are spread</text><text x="342" y="77">across all of these layers,</text>
+                <text x="342" y="94">with very few docs.</text><text x="342" y="118">The paper traces it end to end</text><text x="342" y="135">in its appendix flowcharts.</text>
+            </svg>
+
+            <h2><span class="num">2.1 · GPU PROGRAMMING</span>Streams: ordered inside, parallel across</h2>
+            <p>A kernel is a pile of thread blocks, up to 1,024 threads each. Inside one HIP stream, work runs in order (FIFO). Across streams, work can overlap. That overlap is the whole reason scheduling matters.</p>
+            <svg viewBox="0 0 640 110" width="100%" role="img" aria-label="Stream A runs K1 then K2, stream B runs K3 overlapping both">
+                <text x="0" y="30">Stream A</text><text x="0" y="78">Stream B</text>
+                <rect x="80" y="14" width="220" height="26" fill="#1f4f7a"/><text x="90" y="31" style="fill:#fff">K1</text>
+                <rect x="306" y="14" width="200" height="26" fill="#1f4f7a"/><text x="316" y="31" style="fill:#fff">K2 (waits for K1)</text>
+                <rect x="150" y="62" width="260" height="26" fill="#9f2d20"/><text x="160" y="79" style="fill:#fff">K3 (overlaps K1 and K2)</text>
+                <line x1="80" y1="102" x2="630" y2="102" stroke="rgba(17,16,14,.3)"/><text x="590" y="98">time →</text>
+            </svg>
+
+            <h2><span class="num">2.2 · PRIOR WORK</span>Prior work is mostly NVIDIA</h2>
+            <p>Earlier real-time GPU research mostly targeted NVIDIA, and since that stack is closed it relied on black-box tests, reverse engineering, or working with the vendor. AMD is open, so here they just read the source and then checked it with experiments.</p>
+            <div class="cards">
+                <div class="c"><b>NVIDIA (prior work)</b>Closed driver, so black-box tests, reverse engineering, vendor help.</div>
+                <div class="c"><b>AMD (this paper)</b>Open driver and runtime, so read the code, then confirm with experiments.</div>
+            </div>
+
+            <h2><span class="num">3.1 · PLATFORM</span>The test GPU</h2>
+            <p>A Radeon VII: 4 shader engines (SEs) with 15 compute units (CUs) each, so 60 CUs. One CU holds up to 2,048 threads, which means the whole GPU can have 122,880 threads resident at once.</p>
+            <div class="ses" id="plat"></div>
+            <div class="stats"><div class="stat"><span>Compute units</span><b>60 = 4 × 15</b></div><div class="stat"><span>Max resident threads</span><b>122,880</b></div></div>
+
+            <h2><span class="num">3.2 · SETUP</span>Same math, different block sizes</h2>
+            <p>Both tasks multiply 1,024×1,024 matrices, one thread per output. The only difference is block shape. MM1024 uses 1,024 blocks of 32×32 threads. MM256 uses 4,096 blocks of 16×16. One MM1024 block is the same work as four MM256 blocks, but the small ones can squeeze into gaps the big ones can’t use.</p>
+            <svg viewBox="0 0 640 130" width="100%" role="img" aria-label="One MM1024 block equals four MM256 blocks">
+                <rect x="20" y="10" width="100" height="100" fill="#1f4f7a"/><text x="20" y="126">MM1024 block: 1,024 threads</text>
+                <g fill="#9f2d20"><rect x="250" y="10" width="48" height="48"/><rect x="302" y="10" width="48" height="48"/><rect x="250" y="62" width="48" height="48"/><rect x="302" y="62" width="48" height="48"/></g>
+                <text x="250" y="126">4 × MM256 blocks: 256 threads each</text>
+                <text x="150" y="66" style="font-size:22px">=</text>
+                <text x="420" y="40">Total work is identical.</text><text x="420" y="58">Small blocks fit into gaps</text><text x="420" y="76">that big blocks can’t use.</text>
+            </svg>
+
+            <h2><span class="num">3.3 · ANOMALOUS RESULTS</span>The weird numbers</h2>
+            <p>Two things jump out. Under full sharing, MM256 is the nastiest neighbor you can pick. And the uneven split (an even split plus one CU borrowed from the competitor’s half) is roughly 10× slower than everything else.</p>
+            <div class="row" id="compSel"><button data-c="256" class="on">MM1024 vs. MM256</button><button data-c="1024">MM1024 vs. MM1024</button></div>
+            <div class="lg"><span><i style="background:var(--w)"></i>Mean</span><span><i style="background:var(--w);opacity:.35"></i>Worst case</span></div>
+            <div class="bars" id="bars"></div>
+            <p class="cap">Table 1, in ms (mean / worst case). Bars are on a 0–105 ms scale.</p>
+
+            <h2><span class="num">4.1 · QUEUES IN USERSPACE</span>Streams share 4 queues</h2>
+            <p>Your streams don’t each get their own queue. ROCclr maps them onto a shared pool of 4 HSA queues by default. Two streams that land on the same queue get serialized, even though you declared them independent. The way out: a stream created with a CU mask gets a dedicated queue.</p>
+            <div class="row"><span class="lbl">Streams</span><input type="range" id="nS" min="1" max="10" value="6" step="1"><b id="nSo">6</b><button id="maskBtn">Give stream 1 a CU mask</button></div>
+            <div class="qgrid" id="qs"></div>
+            <p class="cap" id="qcap"></p>
+
+            <h2><span class="num">4.2 · QUEUES TO HARDWARE</span>Only 32 hardware queue slots</h2>
+            <p>The hardware can run 32 queues at once: 4 ACEs × 8 slots. Go past that and the GPU time-slices all the queues, with no priority. For real-time work, the paper’s advice is to turn oversubscription off.</p>
+            <div class="row"><span class="lbl">Active queues (all processes)</span><input type="range" id="nQ" min="1" max="44" value="20" step="1"><b id="nQo">20</b></div>
+            <div class="slots" id="slots"></div>
+            <p class="cap" id="slotCap"></p>
+
+            <h2><span class="num">4.3 · THREAD BLOCK SCHEDULING</span>Small blocks cut ahead</h2>
+            <p>ACEs hand out blocks in strict order. But when a big block doesn’t fit, small blocks from the other kernel take the freed space first, so MM256 ends up holding almost the whole GPU. Toy model of one CU (8 slots × 256 threads):</p>
+            <div class="row" id="mode"><button data-m="amd" class="on">AMD: cut-ahead allowed</button><button data-m="fifo">Strict order (no cut-ahead)</button></div>
+            <div class="lg"><span><i style="background:var(--a)"></i>MM1024 block (4 slots)</span><span><i style="background:var(--b)"></i>MM256 block (1 slot)</span></div>
+            <div class="cuRow" id="cu"></div>
+            <div class="row" style="margin-top:0.6rem"><button id="play">Run</button><button id="stp">Step</button><button id="rst">Reset</button><span class="lbl" style="margin-left:auto">t = <span id="t">0</span></span></div>
+            <div class="stats"><div class="stat"><span>MM1024 share of CU</span><b id="sa" style="color:var(--a)">–</b></div><div class="stat"><span>MM256 share of CU</span><b id="sb" style="color:var(--b)">–</b></div></div>
+            <p class="cap">Illustration only. In the paper’s measured timelines, MM256 grabs nearly all GPU capacity once it starts.</p>
+
+            <h2><span class="num">4.4 · EXPLAINING THE WORST PRACTICES</span>One lone CU stalls everything</h2>
+            <p>The ACE walks the shader engines in order, and it only skips an SE if <em>every</em> CU on it is masked off. Leave a single CU enabled and dispatch has to wait on that one contended CU every lap around.</p>
+            <div class="row" id="seMode"><button data-s="even" class="on">Even split (SE1 fully masked)</button><button data-s="plus">+1 CU on SE1</button><button id="sePlay">Run</button></div>
+            <div class="ses" id="seViz"></div>
+            <div class="stats"><div class="stat"><span>Blocks dispatched</span><b id="seN">0</b></div><div class="stat"><span>Ticks spent waiting</span><b id="seW" style="color:var(--w)">0</b></div></div>
+            <p class="cap">Illustration. Measured effect: 7.6 ms → 101.5 ms worst case for MM1024 vs. MM256.</p>
+
+            <h2><span class="num">5.1 · THE CU-MASK API</span>CU masks interleave across SEs</h2>
+            <p>You set masks at stream creation with <code>hipExtStreamCreateWithCUMask</code>. Mask bits interleave across the SEs (bit i goes to SE i mod 4), so the layout you pick matters. For uneven splits, spreading CUs across all SEs beats packing whole SEs.</p>
+            <div class="bits" id="bits"></div>
+            <div class="row" id="cfg"><button data-k="full" class="on">Full sharing</button><button data-k="pe">SE-packed, equal</button><button data-k="pp">SE-packed, +1 CU</button><button data-k="de">SE-distributed, equal</button><button data-k="dp">SE-distributed, +1 CU</button></div>
+            <div class="lg"><span><i style="background:var(--a)"></i>MM1024 (measured)</span><span><i style="background:var(--b)"></i>MM256</span><span><i style="background:var(--g)"></i>Shared</span><span><i style="outline:2px solid var(--w);outline-offset:-2px"></i>Lone CU on an SE</span></div>
+            <div class="ses" id="mask"></div>
+            <div class="stats"><div class="stat"><span>MM1024 mean</span><b id="mm">–</b></div><div class="stat"><span>MM1024 worst case</span><b id="mx">–</b></div></div>
+            <p class="cap">Table 2 values, in ms. The grid shows each layout schematically.</p>
+
+            <h2><span class="num">5.2 · OTHER AMD-SPECIFIC CONCERNS</span>Other AMD gotchas</h2>
+            <p>If you’re porting from CUDA, be careful: NVIDIA doesn’t let small blocks cut ahead, so ported code might quietly depend on that ordering. Queue multiplexing is another source of contention, and one environment variable tunes it.</p>
+            <div class="cards">
+                <div class="c"><b>Re-test ported code</b>Re-check block-order and performance assumptions on AMD.</div>
+                <div class="c"><b>Tune queue sharing</b><code>GPU_MAX_HW_QUEUES=8 ./app</code> changes the HSA queue pool size (default 4, see 4.1).</div>
+            </div>
+
+            <h2><span class="num">5.3 · FUTURE WORK</span>What’s next</h2>
+            <p>Next up for the authors: other AMD features like compute preemption, and an open platform for testing real-time GPU management.</p>
+            <div class="cards">
+                <div class="c"><b>Compute preemption</b>How AMD swaps running work out and in.</div>
+                <div class="c"><b>Open platform</b>Reproducible real-time GPU experiments.</div>
+            </div>
+
+            <h2><span class="num">6 · CONCLUSION</span>Takeaways</h2>
+            <p>If you want predictable latency on AMD GPUs, you have to know the internal scheduling rules, or you pay for it in worst-case response time.</p>
+            <ul class="tk">
+                <li><strong>Mask whole SEs, or spread evenly.</strong> Never leave a lone CU on an SE.</li>
+                <li><strong>Watch block sizes.</strong> Smaller neighbor blocks can starve yours.</li>
+                <li><strong>Control queues.</strong> Mind the 4-queue pool and the 32-slot limit.</li>
+            </ul>
+            <p class="cap" style="margin-top:1.4rem">Source: Otterness &amp; Anderson, “Exploring AMD GPU Scheduling Details by Experimenting With ‘Worst Practices’” — <a href="https://www.cs.unc.edu/~otternes/papers/rtsj2022.pdf">paper PDF</a>. The toys in 4.3 and 4.4 are simplified illustrations, not the paper’s data.</p>
+        </main>
+
+        <footer>
+            <p>© 2026 Nino Risteski</p>
+        </footer>
+    </div>
+<script>
+const A='#1f4f7a',B='#9f2d20',G='#cfcdc6',W='#a36a13';
+function seGrid(el,fn,ptr){el.innerHTML=[0,1,2,3].map(e=>'<div class="se'+(ptr===e?' ptr':'')+'">SE'+e+'<div class="cus">'+Array.from({length:15},(_,c)=>{const v=fn(e,c);return '<i class="cu'+(v==='L'?' lone':'')+'" style="background:'+(v==='a'||v==='L'?A:v==='b'?B:v==='x'?'transparent;border:1px dashed rgba(17,16,14,.3)':G)+'"></i>'}).join('')+'</div></div>').join('')}
+seGrid(document.getElementById('plat'),()=>'s');
+
+const T1={256:[['Isolated',3.201,3.631],['Full sharing',15.652,19.578],['Even split',6.991,7.630],['Even + 1 CU',84.362,101.531]],1024:[['Isolated',3.201,3.631],['Full sharing',6.447,7.292],['Even split',6.988,8.254],['Even + 1 CU',76.011,98.380]]};
+function bars(c){document.getElementById('bars').innerHTML=T1[c].map(r=>'<div class="br"><span>'+r[0]+'</span><div class="track"><div class="mx" style="width:'+(r[2]/105*100)+'%"></div><div class="mn" style="width:'+(r[1]/105*100)+'%"></div></div><span class="mono">'+r[1].toFixed(1)+' / '+r[2].toFixed(1)+'</span></div>').join('');document.querySelectorAll('#compSel button').forEach(b=>b.classList.toggle('on',b.dataset.c===c))}
+document.querySelectorAll('#compSel button').forEach(b=>b.onclick=()=>bars(b.dataset.c));bars('256');
+
+let masked=false;
+const nS=document.getElementById('nS'),nSo=document.getElementById('nSo'),qs_el=document.getElementById('qs'),qcap=document.getElementById('qcap'),maskBtn=document.getElementById('maskBtn');
+function queues(){const n=+nS.value;nSo.textContent=n;const qs=[[],[],[],[]],ded=[];for(let i=1;i<=n;i++){if(masked&&i===1)ded.push(i);else{const k=masked?i-2:i-1;qs[k%4].push(i)}}
+let h=qs.map((q,i)=>'<div class="q">HSA queue '+i+' (shared)<br>'+q.map(s=>'<span class="chip" style="background:'+(q.length>1?W:A)+'">S'+s+'</span>').join('')+'</div>').join('');
+if(ded.length)h+='<div class="q" style="grid-column:1/-1">Dedicated queue (CU-masked)<br><span class="chip" style="background:'+B+'">S1</span></div>';
+qs_el.innerHTML=h;const sh=qs.filter(q=>q.length>1).length;qcap.textContent=sh?sh+' queue(s) hold more than one stream: their kernels run one after another, not concurrently.':'Every stream has its own queue: no hidden serialization.';maskBtn.classList.toggle('on',masked)}
+nS.oninput=queues;maskBtn.onclick=()=>{masked=!masked;queues()};queues();
+
+const nQ=document.getElementById('nQ');
+function slots(){const n=+nQ.value;document.getElementById('nQo').textContent=n;let h='';for(let a=0;a<4;a++){h+='<span>ACE '+a+'</span>';for(let s=0;s<8;s++){const i=a*8+s;h+='<div class="slot'+(i<Math.min(n,32)?' f':'')+'"></div>'}}document.getElementById('slots').innerHTML=h;const over=n-32;const c=document.getElementById('slotCap');c.style.color=over>0?W:'';c.textContent=over>0?over+' queue(s) don’t fit: the hardware time-slices all of them, with no priority, so ready work can wait.':(32-n)+' slot(s) free: every queue is mapped to hardware.'}
+nQ.oninput=slots;slots();
+
+let mode='amd',sl,turn,t,ua,ub,nid,tm=null;
+function rs(){sl=[];for(let i=0;i<4;i++)sl.push({o:'a',r:5,id:0});[1,2,1,2].forEach((r,i)=>sl.push({o:'b',r,id:i+1}));turn='a';t=0;ua=0;ub=0;nid=10;dr()}
+function place(w){const f=sl.map((s,i)=>s?-1:i).filter(i=>i>=0);if(w==='a'){if(f.length<4)return false;const id=nid++;f.slice(0,4).forEach(i=>sl[i]={o:'a',r:5,id});return true}if(!f.length)return false;sl[f[0]]={o:'b',r:2,id:nid++};return true}
+function disp(){let p=true;while(p){p=false;if(mode==='fifo'){if(place(turn)){turn=turn==='a'?'b':'a';p=true}}else{for(const w of [turn,turn==='a'?'b':'a']){if(place(w)){turn=w==='a'?'b':'a';p=true;break}}}}}
+function st(){t++;sl.forEach(s=>{if(s)s.o==='a'?ua++:ub++});const d=new Set();sl.forEach(s=>{if(s&&--s.r<=0)d.add(s.id)});sl=sl.map(s=>s&&d.has(s.id)?null:s);disp();dr()}
+function dr(){document.getElementById('cu').innerHTML=sl.map(s=>'<div style="'+(s?'background:'+(s.o==='a'?A:B):'border:1px dashed rgba(17,16,14,.3)')+'"></div>').join('');document.getElementById('t').textContent=t;const tt=ua+ub;document.getElementById('sa').textContent=tt?Math.round(ua/tt*100)+'%':'–';document.getElementById('sb').textContent=tt?Math.round(ub/tt*100)+'%':'–'}
+const pb=document.getElementById('play');function stop(){clearInterval(tm);tm=null;pb.textContent='Run'}
+pb.onclick=()=>{if(tm)stop();else{tm=setInterval(st,450);pb.textContent='Pause'}};
+document.getElementById('stp').onclick=()=>{stop();st()};document.getElementById('rst').onclick=()=>{stop();rs()};
+document.querySelectorAll('#mode button').forEach(b=>b.onclick=()=>{mode=b.dataset.m;document.querySelectorAll('#mode button').forEach(x=>x.classList.toggle('on',x===b));stop();rs()});rs();
+
+let seM='even',ptr=0,seN=0,seW=0,seT=null,lone=0;
+function seFn(e,c){if(e===0||e===2)return 'a';if(e===1)return seM==='plus'&&c===0?'L':'x';return 'x'}
+function seDraw(){seGrid(document.getElementById('seViz'),seFn,ptr);document.getElementById('seN').textContent=seN;document.getElementById('seW').textContent=seW}
+function seTick(){const usable=e=>e===0||e===2||(e===1&&seM==='plus');if(!usable(ptr)){ptr=(ptr+1)%4;while(!usable(ptr))ptr=(ptr+1)%4}
+if(ptr===1){lone++;if(lone>=7){lone=0;seN++;ptr=2}else seW++}else{seN++;let n=(ptr+1)%4;while(!usable(n))n=(n+1)%4;ptr=n}seDraw()}
+function seReset(){ptr=0;lone=0;seN=0;seW=0;seDraw()}
+const sp=document.getElementById('sePlay');function seStop(){clearInterval(seT);seT=null;sp.textContent='Run'}
+sp.onclick=()=>{if(seT)seStop();else{seT=setInterval(seTick,350);sp.textContent='Pause'}};
+document.querySelectorAll('#seMode button[data-s]').forEach(b=>b.onclick=()=>{seM=b.dataset.s;document.querySelectorAll('#seMode button[data-s]').forEach(x=>x.classList.toggle('on',x===b));seReset()});seReset();
+
+document.getElementById('bits').innerHTML=Array.from({length:32},(_,i)=>'<div style="background:'+['#1f4f7a','#9f2d20','#a36a13','#6b6a64'][i%4]+'">'+i+'</div>').join('');
+document.getElementById('bits').insertAdjacentHTML('afterend','<p class="cap" style="margin:0 0 0.7rem">Mask bit i → SE (i mod 4): the colors show SE0–SE3.</p>');
+const T2={full:[15.652,19.578],pe:[6.991,7.630],pp:[84.362,101.531],de:[7.269,9.113],dp:[7.324,7.906]};
+function mfn(k){return (e,c)=>{if(k==='full')return 's';if(k==='pe')return e%2===0?'a':'b';if(k==='pp')return e%2===0?'a':(e===1&&c===0?'L':'b');const na=k==='de'?[8,8,7,7][e]:[8,8,8,7][e];return c<na?'a':'b'}}
+function mask(k){seGrid(document.getElementById('mask'),mfn(k));document.getElementById('mm').textContent=T2[k][0].toFixed(1)+' ms';document.getElementById('mx').textContent=T2[k][1].toFixed(1)+' ms';document.querySelectorAll('#cfg button').forEach(b=>b.classList.toggle('on',b.dataset.k===k))}
+document.querySelectorAll('#cfg button').forEach(b=>b.onclick=()=>mask(b.dataset.k));mask('full');
+</script>
+</body>
+</html>
