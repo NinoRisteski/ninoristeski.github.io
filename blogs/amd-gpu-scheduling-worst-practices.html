@@ -14,7 +14,6 @@
         .notes { --a:#1f4f7a; --b:#9f2d20; --w:#a36a13; --g:#cfcdc6; --line:rgba(17,16,14,0.22); --soft:rgba(17,16,14,0.05); --mut:rgba(17,16,14,0.62); }
         .notes * { border-radius: 0; }
         .notes .lede { color: var(--mut); }
-        .notes .num { display:block; margin-bottom:0.15rem; color:var(--b); font-size:0.62rem; font-weight:700; letter-spacing:0.12em; }
         .notes h2 { margin-top:2rem; }
         .notes .cap { margin:0.6rem 0 0; color:var(--mut); font-size:0.7rem; line-height:1.45; }
         .notes .row { display:flex; flex-wrap:wrap; gap:0.4rem; align-items:center; margin:0 0 0.7rem; }
@@ -71,7 +70,7 @@
         <main class="blog-post-content notes">
             <p class="lede">My notes on Otterness &amp; Anderson’s paper (UNC Chapel Hill, Real-Time Systems 2022 / RTNS 2021). Everything was measured on a Radeon VII with ROCm 4.2. One idea per note, plus a little toy you can poke at.</p>
 
-            <h2><span class="num">1 · INTRO</span>Open stack, no docs</h2>
+            <h2>1. Open stack, no docs</h2>
             <p>ROCm is open source, but it’s huge and almost nothing about how it schedules work is written down. So the authors followed a kernel launch through every layer and mapped what happens. Here’s the stack, top to bottom.</p>
             <svg viewBox="0 0 640 150" width="100%" role="img" aria-label="ROCm layers from HIP down to GPU firmware">
                 <rect x="10" y="10" width="300" height="24" fill="#1f4f7a" fill-opacity=".14" stroke="#1f4f7a"/><text x="20" y="27">HIP API (your code)</text>
@@ -84,7 +83,7 @@
                 <text x="342" y="94">with very few docs.</text><text x="342" y="118">The paper traces it end to end</text><text x="342" y="135">in its appendix flowcharts.</text>
             </svg>
 
-            <h2><span class="num">2.1 · GPU PROGRAMMING</span>Streams: ordered inside, parallel across</h2>
+            <h2>2. Streams: ordered inside, parallel across</h2>
             <p>A kernel is a pile of thread blocks, up to 1,024 threads each. Inside one HIP stream, work runs in order (FIFO). Across streams, work can overlap. That overlap is the whole reason scheduling matters.</p>
             <svg viewBox="0 0 640 110" width="100%" role="img" aria-label="Stream A runs K1 then K2, stream B runs K3 overlapping both">
                 <text x="0" y="30">Stream A</text><text x="0" y="78">Stream B</text>
@@ -94,19 +93,19 @@
                 <line x1="80" y1="102" x2="630" y2="102" stroke="rgba(17,16,14,.3)"/><text x="590" y="98">time →</text>
             </svg>
 
-            <h2><span class="num">2.2 · PRIOR WORK</span>Prior work is mostly NVIDIA</h2>
+            <h2>3. Prior work is mostly NVIDIA</h2>
             <p>Earlier real-time GPU research mostly targeted NVIDIA, and since that stack is closed it relied on black-box tests, reverse engineering, or working with the vendor. AMD is open, so here they just read the source and then checked it with experiments.</p>
             <div class="cards">
                 <div class="c"><b>NVIDIA (prior work)</b>Closed driver, so black-box tests, reverse engineering, vendor help.</div>
                 <div class="c"><b>AMD (this paper)</b>Open driver and runtime, so read the code, then confirm with experiments.</div>
             </div>
 
-            <h2><span class="num">3.1 · PLATFORM</span>The test GPU</h2>
+            <h2>4. The test GPU</h2>
             <p>A Radeon VII: 4 shader engines (SEs) with 15 compute units (CUs) each, so 60 CUs. One CU holds up to 2,048 threads, which means the whole GPU can have 122,880 threads resident at once.</p>
             <div class="ses" id="plat"></div>
             <div class="stats"><div class="stat"><span>Compute units</span><b>60 = 4 × 15</b></div><div class="stat"><span>Max resident threads</span><b>122,880</b></div></div>
 
-            <h2><span class="num">3.2 · SETUP</span>Same math, different block sizes</h2>
+            <h2>5. Same math, different block sizes</h2>
             <p>Both tasks multiply 1,024×1,024 matrices, one thread per output. The only difference is block shape. MM1024 uses 1,024 blocks of 32×32 threads. MM256 uses 4,096 blocks of 16×16. One MM1024 block is the same work as four MM256 blocks, but the small ones can squeeze into gaps the big ones can’t use.</p>
             <svg viewBox="0 0 640 130" width="100%" role="img" aria-label="One MM1024 block equals four MM256 blocks">
                 <rect x="20" y="10" width="100" height="100" fill="#1f4f7a"/><text x="20" y="126">MM1024 block: 1,024 threads</text>
@@ -116,26 +115,26 @@
                 <text x="420" y="40">Total work is identical.</text><text x="420" y="58">Small blocks fit into gaps</text><text x="420" y="76">that big blocks can’t use.</text>
             </svg>
 
-            <h2><span class="num">3.3 · ANOMALOUS RESULTS</span>The weird numbers</h2>
+            <h2>6. The weird numbers</h2>
             <p>Two things jump out. Under full sharing, MM256 is the nastiest neighbor you can pick. And the uneven split (an even split plus one CU borrowed from the competitor’s half) is roughly 10× slower than everything else.</p>
             <div class="row" id="compSel"><button data-c="256" class="on">MM1024 vs. MM256</button><button data-c="1024">MM1024 vs. MM1024</button></div>
             <div class="lg"><span><i style="background:var(--w)"></i>Mean</span><span><i style="background:var(--w);opacity:.35"></i>Worst case</span></div>
             <div class="bars" id="bars"></div>
             <p class="cap">Table 1, in ms (mean / worst case). Bars are on a 0–105 ms scale.</p>
 
-            <h2><span class="num">4.1 · QUEUES IN USERSPACE</span>Streams share 4 queues</h2>
+            <h2>7. Streams share 4 queues</h2>
             <p>Your streams don’t each get their own queue. ROCclr maps them onto a shared pool of 4 HSA queues by default. Two streams that land on the same queue get serialized, even though you declared them independent. The way out: a stream created with a CU mask gets a dedicated queue.</p>
             <div class="row"><span class="lbl">Streams</span><input type="range" id="nS" min="1" max="10" value="6" step="1"><b id="nSo">6</b><button id="maskBtn">Give stream 1 a CU mask</button></div>
             <div class="qgrid" id="qs"></div>
             <p class="cap" id="qcap"></p>
 
-            <h2><span class="num">4.2 · QUEUES TO HARDWARE</span>Only 32 hardware queue slots</h2>
+            <h2>8. Only 32 hardware queue slots</h2>
             <p>The hardware can run 32 queues at once: 4 ACEs × 8 slots. Go past that and the GPU time-slices all the queues, with no priority. For real-time work, the paper’s advice is to turn oversubscription off.</p>
             <div class="row"><span class="lbl">Active queues (all processes)</span><input type="range" id="nQ" min="1" max="44" value="20" step="1"><b id="nQo">20</b></div>
             <div class="slots" id="slots"></div>
             <p class="cap" id="slotCap"></p>
 
-            <h2><span class="num">4.3 · THREAD BLOCK SCHEDULING</span>Small blocks cut ahead</h2>
+            <h2>9. Small blocks cut ahead</h2>
             <p>ACEs hand out blocks in strict order. But when a big block doesn’t fit, small blocks from the other kernel take the freed space first, so MM256 ends up holding almost the whole GPU. Toy model of one CU (8 slots × 256 threads):</p>
             <div class="row" id="mode"><button data-m="amd" class="on">AMD: cut-ahead allowed</button><button data-m="fifo">Strict order (no cut-ahead)</button></div>
             <div class="lg"><span><i style="background:var(--a)"></i>MM1024 block (4 slots)</span><span><i style="background:var(--b)"></i>MM256 block (1 slot)</span></div>
@@ -144,14 +143,14 @@
             <div class="stats"><div class="stat"><span>MM1024 share of CU</span><b id="sa" style="color:var(--a)">–</b></div><div class="stat"><span>MM256 share of CU</span><b id="sb" style="color:var(--b)">–</b></div></div>
             <p class="cap">Illustration only. In the paper’s measured timelines, MM256 grabs nearly all GPU capacity once it starts.</p>
 
-            <h2><span class="num">4.4 · EXPLAINING THE WORST PRACTICES</span>One lone CU stalls everything</h2>
+            <h2>10. One lone CU stalls everything</h2>
             <p>The ACE walks the shader engines in order, and it only skips an SE if <em>every</em> CU on it is masked off. Leave a single CU enabled and dispatch has to wait on that one contended CU every lap around.</p>
             <div class="row" id="seMode"><button data-s="even" class="on">Even split (SE1 fully masked)</button><button data-s="plus">+1 CU on SE1</button><button id="sePlay">Run</button></div>
             <div class="ses" id="seViz"></div>
             <div class="stats"><div class="stat"><span>Blocks dispatched</span><b id="seN">0</b></div><div class="stat"><span>Ticks spent waiting</span><b id="seW" style="color:var(--w)">0</b></div></div>
             <p class="cap">Illustration. Measured effect: 7.6 ms → 101.5 ms worst case for MM1024 vs. MM256.</p>
 
-            <h2><span class="num">5.1 · THE CU-MASK API</span>CU masks interleave across SEs</h2>
+            <h2>11. CU masks interleave across SEs</h2>
             <p>You set masks at stream creation with <code>hipExtStreamCreateWithCUMask</code>. Mask bits interleave across the SEs (bit i goes to SE i mod 4), so the layout you pick matters. For uneven splits, spreading CUs across all SEs beats packing whole SEs.</p>
             <div class="bits" id="bits"></div>
             <div class="row" id="cfg"><button data-k="full" class="on">Full sharing</button><button data-k="pe">SE-packed, equal</button><button data-k="pp">SE-packed, +1 CU</button><button data-k="de">SE-distributed, equal</button><button data-k="dp">SE-distributed, +1 CU</button></div>
@@ -160,28 +159,28 @@
             <div class="stats"><div class="stat"><span>MM1024 mean</span><b id="mm">–</b></div><div class="stat"><span>MM1024 worst case</span><b id="mx">–</b></div></div>
             <p class="cap">Table 2 values, in ms. The grid shows each layout schematically.</p>
 
-            <h2><span class="num">5.2 · OTHER AMD-SPECIFIC CONCERNS</span>Other AMD gotchas</h2>
+            <h2>12. Other AMD gotchas</h2>
             <p>If you’re porting from CUDA, be careful: NVIDIA doesn’t let small blocks cut ahead, so ported code might quietly depend on that ordering. Queue multiplexing is another source of contention, and one environment variable tunes it.</p>
             <div class="cards">
                 <div class="c"><b>Re-test ported code</b>Re-check block-order and performance assumptions on AMD.</div>
-                <div class="c"><b>Tune queue sharing</b><code>GPU_MAX_HW_QUEUES=8 ./app</code> changes the HSA queue pool size (default 4, see 4.1).</div>
+                <div class="c"><b>Tune queue sharing</b><code>GPU_MAX_HW_QUEUES=8 ./app</code> changes the HSA queue pool size (default 4, see 7).</div>
             </div>
 
-            <h2><span class="num">5.3 · FUTURE WORK</span>What’s next</h2>
+            <h2>13. What’s next</h2>
             <p>Next up for the authors: other AMD features like compute preemption, and an open platform for testing real-time GPU management.</p>
             <div class="cards">
                 <div class="c"><b>Compute preemption</b>How AMD swaps running work out and in.</div>
                 <div class="c"><b>Open platform</b>Reproducible real-time GPU experiments.</div>
             </div>
 
-            <h2><span class="num">6 · CONCLUSION</span>Takeaways</h2>
+            <h2>14. Takeaways</h2>
             <p>If you want predictable latency on AMD GPUs, you have to know the internal scheduling rules, or you pay for it in worst-case response time.</p>
             <ul class="tk">
                 <li><strong>Mask whole SEs, or spread evenly.</strong> Never leave a lone CU on an SE.</li>
                 <li><strong>Watch block sizes.</strong> Smaller neighbor blocks can starve yours.</li>
                 <li><strong>Control queues.</strong> Mind the 4-queue pool and the 32-slot limit.</li>
             </ul>
-            <p class="cap" style="margin-top:1.4rem">Source: Otterness &amp; Anderson, “Exploring AMD GPU Scheduling Details by Experimenting With ‘Worst Practices’” — <a href="https://www.cs.unc.edu/~otternes/papers/rtsj2022.pdf">paper PDF</a>. The toys in 4.3 and 4.4 are simplified illustrations, not the paper’s data.</p>
+            <p class="cap" style="margin-top:1.4rem">Source: Otterness &amp; Anderson, “Exploring AMD GPU Scheduling Details by Experimenting With ‘Worst Practices’” — <a href="https://www.cs.unc.edu/~otternes/papers/rtsj2022.pdf">paper PDF</a>. The toys in 9 and 10 are simplified illustrations, not the paper’s data.</p>
         </main>
 
         <footer>
